@@ -50,11 +50,11 @@
             "weeks-pos": "right",
             "on-scroll": 1,
             "format": {
-                "months": "<span color='#dcd7ba'><b>{}</b></span>",
-                "days": "<span color='#c8c093'>{}</span>",
-                "weeks": "<span color='#6a9589'>W{}</span>",
-                "weekdays": "<span color='#c0a36e'>{}</span>",
-                "today": "<span color='#7e9cd8'><b><u>{}</u></b></span>"
+                "months": "<span color='#c0caf5'><b>{}</b></span>",
+                "days": "<span color='#a9b1d6'>{}</span>",
+                "weeks": "<span color='#7dcfff'>W{}</span>",
+                "weekdays": "<span color='#e0af68'>{}</span>",
+                "today": "<span color='#bb9af7'><b><u>{}</u></b></span>"
             }
         }
     },

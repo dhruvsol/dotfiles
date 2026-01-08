@@ -1,9 +1,9 @@
-/* ──────────────────────────────────────────────────────────────────────────
-   Waybar CSS - Inspired by dionysus dotfiles
-   One Dark + Nord fusion theme
-   ────────────────────────────────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════
+   Sakura Night - Waybar Theme
+   Inspired by mystical cherry blossom twilight
+   ═══════════════════════════════════════════════════════════════ */
 
-/* === Base Styling ======================================================== */
+/* === Base Styling === */
 
 * {
   border: none;
@@ -15,10 +15,10 @@
 }
 
 window#waybar {
-  background: #282c34;
-  border: 2px solid #61afef;
-  border-radius: 8px;
-  opacity: 0.96;
+  background: #1a1b26;
+  border: 2px solid #bb9af7;
+  border-radius: 10px;
+  opacity: 0.94;
   transition: background-color 0.3s ease;
 }
 
@@ -27,7 +27,7 @@ window#waybar.hidden {
 }
 
 
-/* === Workspaces ========================================================== */
+/* === Workspaces === */
 
 #workspaces {
   background-color: transparent;
@@ -39,52 +39,52 @@ window#waybar.hidden {
   min-width: 0;
   padding: 6px 10px;
   margin: 4px 2px;
-  border-radius: 6px;
-  background-color: #2e3440;
-  color: #56b6c2;
+  border-radius: 8px;
+  background-color: #24283b;
+  color: #7dcfff;
   font-family: "JetBrainsMono Nerd Font";
   font-size: 13px;
   transition: all 0.2s ease-in-out;
 }
 
 #workspaces button.active {
-  color: #282c34;
-  background: linear-gradient(135deg, #61afef, #56b6c2);
+  color: #1a1b26;
+  background: linear-gradient(135deg, #bb9af7, #f7768e);
   font-weight: bold;
 }
 
 #workspaces button.urgent {
-  color: #282c34;
-  background-color: #e06c75;
+  color: #1a1b26;
+  background-color: #f7768e;
 }
 
 #workspaces button:hover {
-  color: #fab387;
-  background-color: #3b4252;
+  color: #ff9e64;
+  background-color: #33467c;
 }
 
 
-/* === Window Title ======================================================== */
+/* === Window Title === */
 
 #window {
-  color: #abb2bf;
+  color: #a9b1d6;
   padding: 0 12px;
   margin-left: 8px;
   font-size: 12px;
 }
 
 
-/* === Clock =============================================================== */
+/* === Clock === */
 
 #clock {
-  color: #fab387;
+  color: #bb9af7;
   font-weight: bold;
   font-size: 13px;
   padding: 0 16px;
 }
 
 
-/* === Module Container Styling ============================================ */
+/* === Module Container Styling === */
 
 #cpu,
 #memory,
@@ -94,71 +94,71 @@ window#waybar.hidden {
 #tray {
   padding: 4px 12px;
   margin: 4px 3px;
-  background-color: #2e3440;
-  border: 2px solid #3b4252;
-  border-radius: 6px;
-  color: #abb2bf;
+  background-color: #24283b;
+  border: 2px solid #33467c;
+  border-radius: 8px;
+  color: #c0caf5;
   transition: all 0.2s ease-in-out;
 }
 
 
-/* === CPU ================================================================= */
+/* === CPU === */
 
 #cpu {
-  color: #61afef;
+  color: #7dcfff;
 }
 
 
-/* === Memory ============================================================== */
+/* === Memory === */
 
 #memory {
-  color: #c678dd;
+  color: #7aa2f7;
 }
 
 
-/* === Audio =============================================================== */
+/* === Audio === */
 
 #pulseaudio {
-  color: #56b6c2;
+  color: #ff9e64;
 }
 
 #pulseaudio.muted {
-  background-color: #e06c75;
-  color: #282c34;
+  background-color: #f7768e;
+  color: #1a1b26;
 }
 
 
-/* === Network ============================================================= */
+/* === Network === */
 
 #network {
-  color: #98c379;
+  color: #9ece6a;
 }
 
 #network.disconnected {
-  background-color: #e06c75;
-  color: #282c34;
+  background-color: #f7768e;
+  color: #1a1b26;
 }
 
 
-/* === Battery ============================================================= */
+/* === Battery === */
 
 #battery {
-  color: #98c379;
+  color: #9ece6a;
 }
 
 #battery.warning {
-  color: #e5c07b;
+  color: #e0af68;
 }
 
 #battery.critical {
-  background-color: #e06c75;
-  color: #282c34;
+  background-color: #f7768e;
+  color: #1a1b26;
   animation: pulse 1s ease-in-out infinite;
 }
 
 #battery.charging,
 #battery.plugged {
-  color: #98c379;
+  color: #9ece6a;
 }
 
 @keyframes pulse {
@@ -167,7 +167,7 @@ window#waybar.hidden {
 }
 
 
-/* === Tray ================================================================ */
+/* === Tray === */
 
 #tray {
   margin-right: 6px;
@@ -180,11 +180,11 @@ window#waybar.hidden {
 
 #tray > .needs-attention {
   -gtk-icon-effect: highlight;
-  background-color: #e06c75;
+  background-color: #f7768e;
 }
 
 
-/* === Hover Effects ======================================================= */
+/* === Hover Effects === */
 
 #cpu:hover,
 #memory:hover,
@@ -193,21 +193,21 @@ window#waybar.hidden {
 #battery:hover,
 #clock:hover,
 #tray:hover {
-  background-color: #3b4252;
-  border-color: #56b6c2;
-  color: #56b6c2;
+  background-color: #33467c;
+  border-color: #bb9af7;
+  color: #bb9af7;
 }
 
 
-/* === Tooltips ============================================================ */
+/* === Tooltips === */
 
 tooltip {
-  background-color: #2e3440;
-  border: 2px solid #61afef;
-  border-radius: 8px;
+  background-color: #15141b;
+  border: 2px solid #bb9af7;
+  border-radius: 10px;
 }
 
 tooltip label {
-  color: #abb2bf;
+  color: #c0caf5;
   padding: 8px;
 }

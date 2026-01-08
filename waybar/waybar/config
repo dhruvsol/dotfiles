@@ -1,7 +1,7 @@
-// ──────────────────────────────────────────────────────────────────────────
-//  Waybar Configuration
-//  Inspired by dionysus dotfiles
-// ──────────────────────────────────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════════
+//  Waybar Configuration - Sakura Night
+//  Inspired by mystical cherry blossom twilight
+// ═══════════════════════════════════════════════════════════════
 
 {
   "layer": "top",
@@ -79,11 +79,11 @@
       "weeks-pos": "right",
       "on-scroll": 1,
       "format": {
-        "months": "<span color='#fab387'><b>{}</b></span>",
-        "days": "<span color='#c8c093'>{}</span>",
-        "weeks": "<span color='#56b6c2'>W{}</span>",
-        "weekdays": "<span color='#e5c07b'>{}</span>",
-        "today": "<span color='#61afef'><b><u>{}</u></b></span>"
+        "months": "<span color='#bb9af7'><b>{}</b></span>",
+        "days": "<span color='#a9b1d6'>{}</span>",
+        "weeks": "<span color='#7dcfff'>W{}</span>",
+        "weekdays": "<span color='#e0af68'>{}</span>",
+        "today": "<span color='#f7768e'><b><u>{}</u></b></span>"
       }
     }
   },

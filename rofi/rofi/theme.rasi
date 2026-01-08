@@ -1,19 +1,24 @@
-/* ── Rofi Theme ──────────────────────────────
-   One Dark + Nord fusion theme
-   Inspired by dionysus dotfiles
-   ─────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════
+   Sakura Night - Rofi Theme
+   Inspired by mystical cherry blossom twilight
+   ═══════════════════════════════════════════════════════════════ */
 
 /* === Color Palette === */
 * {
-    bg:          #282c34;
-    bg-alt:      #2e3440;
-    bg-selected: #3b4252;
-    fg:          #abb2bf;
-    fg-alt:      #5c6370;
-    accent:      #61afef;
-    accent-alt:  #56b6c2;
-    urgent:      #e06c75;
-    warning:     #fab387;
+    bg:          #1a1b26;
+    bg-alt:      #15141b;
+    bg-selected: #33467c;
+    bg-float:    #24283b;
+    fg:          #c0caf5;
+    fg-alt:      #a9b1d6;
+    fg-dim:      #565f89;
+    accent:      #bb9af7;
+    accent-alt:  #7dcfff;
+    pink:        #f7768e;
+    peach:       #ff9e64;
+    green:       #9ece6a;
+    urgent:      #f7768e;
+    warning:     #e0af68;
 
     font: "JetBrainsMono Nerd Font 11";
     background-color: transparent;
@@ -24,13 +29,14 @@
 
 /* === Window === */
 window {
-    width: 650px;
+    width: 680px;
     location: center;
     anchor: center;
     border: 2px solid;
     border-color: @accent;
-    border-radius: 12px;
+    border-radius: 14px;
     background-color: @bg;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
 }
 
 /* === Main Layout === */
@@ -43,28 +49,28 @@ mainbox {
 /* === Input Bar === */
 inputbar {
     children: [ prompt, entry ];
-    padding: 14px;
+    padding: 16px;
     background-color: @bg-alt;
-    border-radius: 10px 10px 0 0;
+    border-radius: 12px 12px 0 0;
 }
 
 prompt {
-    padding: 0 8px 0 4px;
+    padding: 0 10px 0 4px;
     text-color: @accent;
     font: "JetBrainsMono Nerd Font Bold 12";
 }
 
 entry {
     placeholder: "Search...";
-    placeholder-color: @fg-alt;
+    placeholder-color: @fg-dim;
     text-color: @fg;
     cursor: text;
 }
 
 /* === Message === */
 message {
-    padding: 8px 14px;
-    background-color: @bg-selected;
+    padding: 10px 16px;
+    background-color: @bg-float;
 }
 
 textbox {
@@ -76,18 +82,18 @@ listview {
     lines: 8;
     columns: 1;
     fixed-height: true;
-    padding: 8px;
-    spacing: 4px;
+    padding: 10px;
+    spacing: 6px;
     scrollbar: false;
     background-color: @bg;
-    border-radius: 0 0 10px 10px;
+    border-radius: 0 0 12px 12px;
 }
 
 /* === Elements === */
 element {
-    padding: 10px 14px;
-    spacing: 10px;
-    border-radius: 8px;
+    padding: 12px 16px;
+    spacing: 12px;
+    border-radius: 10px;
     cursor: pointer;
 }
 
@@ -110,7 +116,7 @@ element selected.normal {
     background-color: @bg-selected;
     text-color: @accent;
     border: 1px solid;
-    border-color: @accent-alt;
+    border-color: @accent;
 }
 
 element selected.urgent {
@@ -129,7 +135,7 @@ element alternate.normal {
 }
 
 element-icon {
-    size: 24px;
+    size: 26px;
     cursor: inherit;
 }
 

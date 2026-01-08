@@ -22,6 +22,7 @@ CONFIG_PACKAGES=(
     "fontconfig"
     "code"
     "waybar"
+    "rofi"
 )
 
 # Packages that go to ~/.config but need special handling
@@ -29,6 +30,7 @@ CONFIG_PACKAGES=(
 CONFIG_FLAT_PACKAGES=(
     "hypr"
     "alacritty"
+    "assets"
 )
 
 # Packages that go to ~ (home directory)
