@@ -22,7 +22,6 @@ NC='\033[0m'
 PACKAGES=(
     "hypr:$CONFIG_DIR/hypr"
     "alacritty:$CONFIG_DIR/alacritty"
-    "assets:$CONFIG_DIR/assets"
     "waybar:$CONFIG_DIR/waybar"
     "rofi:$CONFIG_DIR/rofi"
     "fontconfig:$CONFIG_DIR/fontconfig"
