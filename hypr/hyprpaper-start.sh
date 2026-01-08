@@ -6,12 +6,12 @@
 
 WALLPAPER="$HOME/.config/hypr/bg.jpeg"
 
-# Wait for Hyprland to be ready
-sleep 2
+# Wait for Hyprland to be fully ready
+sleep 3
 
 # Check if wallpaper exists
 if [[ ! -f "$WALLPAPER" ]]; then
-    echo "Error: Wallpaper not found at $WALLPAPER"
+    notify-send "Hyprpaper" "Wallpaper not found: $WALLPAPER"
     exit 1
 fi
 
@@ -20,25 +20,22 @@ killall hyprpaper 2>/dev/null
 sleep 1
 
 # Start hyprpaper in background
-echo "Starting hyprpaper..."
 hyprpaper &
-HYPRPAPER_PID=$!
-
-# Wait for hyprpaper to initialize
-sleep 3
+sleep 2
 
 # Preload and set wallpaper via hyprctl
-echo "Setting wallpaper..."
-hyprctl hyprpaper preload "$WALLPAPER"
-sleep 1
+hyprctl hyprpaper preload "$WALLPAPER" 2>/dev/null
 
 # Get all monitors and set wallpaper on each
-for monitor in $(hyprctl monitors -j | jq -r '.[].name'); do
-    echo "Setting wallpaper on $monitor"
-    hyprctl hyprpaper wallpaper "$monitor,$WALLPAPER"
-done
+if command -v jq &>/dev/null; then
+    for monitor in $(hyprctl monitors -j | jq -r '.[].name'); do
+        hyprctl hyprpaper wallpaper "$monitor,$WALLPAPER" 2>/dev/null
+    done
+else
+    # Fallback if jq not installed - try common monitor names
+    hyprctl hyprpaper wallpaper "eDP-1,$WALLPAPER" 2>/dev/null
+    hyprctl hyprpaper wallpaper "DP-1,$WALLPAPER" 2>/dev/null
+    hyprctl hyprpaper wallpaper "HDMI-A-1,$WALLPAPER" 2>/dev/null
+fi
 
-echo "Wallpaper set successfully!"
-
-# Keep the script running to maintain the service
-wait $HYPRPAPER_PID
+echo "Hyprpaper started"
