@@ -1,0 +1,183 @@
+/* ═══════════════════════════════════════════════════════════════
+   Sakura Night - Waybar Theme
+   Inspired by mystical cherry blossom twilight
+   ═══════════════════════════════════════════════════════════════ */
+
+@define-color bg #1a1b26;
+@define-color bg-dark #15141b;
+@define-color bg-float #24283b;
+@define-color fg #c0caf5;
+@define-color fg-dim #a9b1d6;
+@define-color black #15141b;
+@define-color red #f7768e;
+@define-color green #9ece6a;
+@define-color yellow #e0af68;
+@define-color blue #7aa2f7;
+@define-color magenta #bb9af7;
+@define-color cyan #7dcfff;
+@define-color white #c0caf5;
+@define-color pink #f7768e;
+@define-color peach #ff9e64;
+@define-color lavender #bb9af7;
+@define-color selection #33467c;
+
+* {
+    font-family: "JetBrainsMono Nerd Font", "Symbols Nerd Font", sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    min-height: 0;
+}
+
+window#waybar {
+    background: transparent;
+}
+
+window#waybar > box {
+    background: alpha(@bg, 0.88);
+    border: 2px solid alpha(@lavender, 0.5);
+    border-radius: 14px;
+    box-shadow: 0 4px 16px rgba(26, 27, 38, 0.6);
+}
+
+/* Reset default styling */
+button {
+    box-shadow: none;
+    border: none;
+    background: transparent;
+}
+
+button:hover {
+    background: alpha(@selection, 0.6);
+    border-radius: 10px;
+}
+
+/* Workspaces */
+#workspaces {
+    margin-left: 8px;
+    padding: 0 4px;
+}
+
+#workspaces button {
+    color: @fg-dim;
+    padding: 4px 10px;
+    margin: 4px 2px;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+}
+
+#workspaces button.active {
+    color: @bg;
+    background: linear-gradient(135deg, @lavender, @pink);
+    font-weight: bold;
+    box-shadow: 0 2px 8px alpha(@lavender, 0.4);
+}
+
+#workspaces button.urgent {
+    color: @bg;
+    background: @red;
+}
+
+#workspaces button:hover {
+    color: @fg;
+    background: alpha(@lavender, 0.25);
+}
+
+/* Window title */
+#window {
+    color: @fg-dim;
+    padding: 0 12px;
+    margin-left: 8px;
+}
+
+/* Center clock */
+#clock {
+    color: @lavender;
+    font-weight: 600;
+    padding: 0 16px;
+    text-shadow: 0 0 8px alpha(@lavender, 0.3);
+}
+
+/* Right modules container styling */
+#cpu,
+#memory,
+#battery,
+#network,
+#pulseaudio,
+#tray {
+    padding: 0 12px;
+    margin: 4px 2px;
+    border-radius: 10px;
+    color: @fg;
+}
+
+#cpu {
+    color: @cyan;
+}
+
+#memory {
+    color: @blue;
+}
+
+#pulseaudio {
+    color: @peach;
+}
+
+#pulseaudio.muted {
+    color: @fg-dim;
+}
+
+#network {
+    color: @green;
+}
+
+#network.disconnected {
+    color: @red;
+}
+
+#battery {
+    color: @green;
+}
+
+#battery.warning {
+    color: @yellow;
+}
+
+#battery.critical {
+    color: @red;
+    animation: pulse 1s ease-in-out infinite;
+}
+
+#battery.charging {
+    color: @green;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+#tray {
+    margin-right: 8px;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: @red;
+}
+
+/* Tooltip styling */
+tooltip {
+    background: @bg-dark;
+    border: 1px solid @lavender;
+    border-radius: 10px;
+}
+
+tooltip label {
+    color: @fg;
+    padding: 8px;
+}
