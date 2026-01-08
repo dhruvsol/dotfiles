@@ -1,20 +1,13 @@
 #!/usr/bin/env bash
 
 # ═══════════════════════════════════════════════════════════════
-# Hyprpaper Starter - ensures hyprpaper is running
+# Hyprpaper Starter - starts hyprpaper and sets wallpaper
 # ═══════════════════════════════════════════════════════════════
 
-CONFIG="$HOME/.config/hypr/hyprpaper.conf"
 WALLPAPER="$HOME/.config/hypr/bg.jpeg"
 
 # Wait for Hyprland to be ready
 sleep 2
-
-# Check if config exists
-if [[ ! -f "$CONFIG" ]]; then
-    echo "Error: hyprpaper.conf not found at $CONFIG"
-    exit 1
-fi
 
 # Check if wallpaper exists
 if [[ ! -f "$WALLPAPER" ]]; then
@@ -24,8 +17,28 @@ fi
 
 # Kill existing instance if any
 killall hyprpaper 2>/dev/null
+sleep 1
 
-# Start hyprpaper
+# Start hyprpaper in background
 echo "Starting hyprpaper..."
-exec hyprpaper
+hyprpaper &
+HYPRPAPER_PID=$!
 
+# Wait for hyprpaper to initialize
+sleep 3
+
+# Preload and set wallpaper via hyprctl
+echo "Setting wallpaper..."
+hyprctl hyprpaper preload "$WALLPAPER"
+sleep 1
+
+# Get all monitors and set wallpaper on each
+for monitor in $(hyprctl monitors -j | jq -r '.[].name'); do
+    echo "Setting wallpaper on $monitor"
+    hyprctl hyprpaper wallpaper "$monitor,$WALLPAPER"
+done
+
+echo "Wallpaper set successfully!"
+
+# Keep the script running to maintain the service
+wait $HYPRPAPER_PID
