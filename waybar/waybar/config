@@ -1,0 +1,145 @@
+// ──────────────────────────────────────────────────────────────────────────
+//  Waybar Configuration
+//  Inspired by dionysus dotfiles
+// ──────────────────────────────────────────────────────────────────────────
+
+{
+  "layer": "top",
+  "position": "top",
+  "height": 36,
+  "margin-top": 8,
+  "margin-left": 12,
+  "margin-right": 12,
+  "spacing": 0,
+
+  // ── Modules Layout ───────────────────────────────────────────────
+  "modules-left": [
+    "hyprland/workspaces",
+    "hyprland/window"
+  ],
+
+  "modules-center": [
+    "clock"
+  ],
+
+  "modules-right": [
+    "pulseaudio",
+    "network",
+    "cpu",
+    "memory",
+    "battery",
+    "tray"
+  ],
+
+  // ── Workspaces ───────────────────────────────────────────────────
+  "hyprland/workspaces": {
+    "format": "{icon}",
+    "format-icons": {
+      "1": "一",
+      "2": "二",
+      "3": "三",
+      "4": "四",
+      "5": "五",
+      "6": "六",
+      "7": "七",
+      "8": "八",
+      "9": "九",
+      "10": "十",
+      "urgent": "󰗖",
+      "active": "󰝥",
+      "default": "󰧞"
+    },
+    "on-click": "activate",
+    "persistent-workspaces": {
+      "*": 5
+    }
+  },
+
+  // ── Window ───────────────────────────────────────────────────────
+  "hyprland/window": {
+    "format": "{}",
+    "max-length": 35,
+    "separate-outputs": true,
+    "rewrite": {
+      "(.*) — Mozilla Firefox": "󰈹  $1",
+      "(.*) - Visual Studio Code": "󰨞  $1",
+      "(.*) - Cursor": "󰨞  $1",
+      "": "󰇄  Desktop"
+    }
+  },
+
+  // ── Clock ────────────────────────────────────────────────────────
+  "clock": {
+    "format": "[   {:%I:%M %p} ]",
+    "format-alt": "  {:%A, %B %d, %Y}",
+    "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    "calendar": {
+      "mode": "year",
+      "mode-mon-col": 3,
+      "weeks-pos": "right",
+      "on-scroll": 1,
+      "format": {
+        "months": "<span color='#fab387'><b>{}</b></span>",
+        "days": "<span color='#c8c093'>{}</span>",
+        "weeks": "<span color='#56b6c2'>W{}</span>",
+        "weekdays": "<span color='#e5c07b'>{}</span>",
+        "today": "<span color='#61afef'><b><u>{}</u></b></span>"
+      }
+    }
+  },
+
+  // ── CPU ──────────────────────────────────────────────────────────
+  "cpu": {
+    "format": "  {usage}%",
+    "tooltip": true,
+    "interval": 2
+  },
+
+  // ── Memory ───────────────────────────────────────────────────────
+  "memory": {
+    "format": "  {}%",
+    "tooltip-format": "{used:0.1f}GB / {total:0.1f}GB"
+  },
+
+  // ── Battery ──────────────────────────────────────────────────────
+  "battery": {
+    "states": {
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{icon}  {capacity}%",
+    "format-charging": "󰂄  {capacity}%",
+    "format-plugged": "󰚥  {capacity}%",
+    "format-full": "󰁹  Full",
+    "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+  },
+
+  // ── Network ──────────────────────────────────────────────────────
+  "network": {
+    "format-wifi": "{icon}  {signalStrength}%",
+    "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
+    "format-ethernet": "󰀂  {ipaddr}",
+    "format-disconnected": "󰤭  Off",
+    "tooltip-format-wifi": "  {essid}\n󰩟  {ipaddr}/{cidr}\n⇣{bandwidthDownBytes} ⇡{bandwidthUpBytes}",
+    "tooltip-format-ethernet": "󰀂  {ifname}\n󰩟  {ipaddr}/{cidr}",
+    "on-click": "nm-connection-editor"
+  },
+
+  // ── Audio ────────────────────────────────────────────────────────
+  "pulseaudio": {
+    "format": "{icon}  {volume}%",
+    "format-muted": "󰖁  muted",
+    "format-icons": {
+      "default": ["󰕿", "󰖀", "󰕾"]
+    },
+    "on-click": "pavucontrol",
+    "on-scroll-up": "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+",
+    "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+  },
+
+  // ── Tray ─────────────────────────────────────────────────────────
+  "tray": {
+    "icon-size": 16,
+    "spacing": 8
+  }
+}

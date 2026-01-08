@@ -1,0 +1,18 @@
+/* ── Rofi Config ──────────────────────────────
+   Location: ~/.config/rofi/config.rasi
+   Inspired by dionysus dotfiles
+   ─────────────────────────────────────────── */
+
+configuration {
+    modi: "drun,run,window";
+    show-icons: true;
+    icon-theme: "Papirus-Dark";
+    font: "JetBrainsMono Nerd Font 12";
+    drun-display-format: "{name}";
+    display-drun: "  Apps";
+    display-run: "  Run";
+    display-window: "  Windows";
+}
+
+/* Import theme */
+@theme "~/.config/rofi/theme.rasi"

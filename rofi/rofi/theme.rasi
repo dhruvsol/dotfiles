@@ -1,0 +1,147 @@
+/* ── Rofi Theme ──────────────────────────────
+   One Dark + Nord fusion theme
+   Inspired by dionysus dotfiles
+   ─────────────────────────────────────────── */
+
+/* === Color Palette === */
+* {
+    bg:          #282c34;
+    bg-alt:      #2e3440;
+    bg-selected: #3b4252;
+    fg:          #abb2bf;
+    fg-alt:      #5c6370;
+    accent:      #61afef;
+    accent-alt:  #56b6c2;
+    urgent:      #e06c75;
+    warning:     #fab387;
+
+    font: "JetBrainsMono Nerd Font 11";
+    background-color: transparent;
+    text-color: @fg;
+    padding: 0px;
+    margin: 0px;
+}
+
+/* === Window === */
+window {
+    width: 650px;
+    location: center;
+    anchor: center;
+    border: 2px solid;
+    border-color: @accent;
+    border-radius: 12px;
+    background-color: @bg;
+}
+
+/* === Main Layout === */
+mainbox {
+    children: [ inputbar, message, listview ];
+    spacing: 0px;
+    padding: 0px;
+}
+
+/* === Input Bar === */
+inputbar {
+    children: [ prompt, entry ];
+    padding: 14px;
+    background-color: @bg-alt;
+    border-radius: 10px 10px 0 0;
+}
+
+prompt {
+    padding: 0 8px 0 4px;
+    text-color: @accent;
+    font: "JetBrainsMono Nerd Font Bold 12";
+}
+
+entry {
+    placeholder: "Search...";
+    placeholder-color: @fg-alt;
+    text-color: @fg;
+    cursor: text;
+}
+
+/* === Message === */
+message {
+    padding: 8px 14px;
+    background-color: @bg-selected;
+}
+
+textbox {
+    text-color: @warning;
+}
+
+/* === List View === */
+listview {
+    lines: 8;
+    columns: 1;
+    fixed-height: true;
+    padding: 8px;
+    spacing: 4px;
+    scrollbar: false;
+    background-color: @bg;
+    border-radius: 0 0 10px 10px;
+}
+
+/* === Elements === */
+element {
+    padding: 10px 14px;
+    spacing: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+element normal.normal {
+    background-color: transparent;
+    text-color: @fg;
+}
+
+element normal.urgent {
+    background-color: @urgent;
+    text-color: @bg;
+}
+
+element normal.active {
+    background-color: @accent;
+    text-color: @bg;
+}
+
+element selected.normal {
+    background-color: @bg-selected;
+    text-color: @accent;
+    border: 1px solid;
+    border-color: @accent-alt;
+}
+
+element selected.urgent {
+    background-color: @urgent;
+    text-color: @bg;
+}
+
+element selected.active {
+    background-color: @accent;
+    text-color: @bg;
+}
+
+element alternate.normal {
+    background-color: transparent;
+    text-color: @fg;
+}
+
+element-icon {
+    size: 24px;
+    cursor: inherit;
+}
+
+element-text {
+    cursor: inherit;
+    vertical-align: 0.5;
+}
+
+/* === Scrollbar === */
+scrollbar {
+    width: 4px;
+    handle-width: 4px;
+    handle-color: @accent;
+    border-radius: 4px;
+}

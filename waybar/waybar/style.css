@@ -1,0 +1,213 @@
+/* ──────────────────────────────────────────────────────────────────────────
+   Waybar CSS - Inspired by dionysus dotfiles
+   One Dark + Nord fusion theme
+   ────────────────────────────────────────────────────────────────────────── */
+
+/* === Base Styling ======================================================== */
+
+* {
+  border: none;
+  border-radius: 0;
+  min-height: 0;
+  font-family: "JetBrainsMono Nerd Font", "Symbols Nerd Font", monospace;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+window#waybar {
+  background: #282c34;
+  border: 2px solid #61afef;
+  border-radius: 8px;
+  opacity: 0.96;
+  transition: background-color 0.3s ease;
+}
+
+window#waybar.hidden {
+  opacity: 0.2;
+}
+
+
+/* === Workspaces ========================================================== */
+
+#workspaces {
+  background-color: transparent;
+  margin-left: 6px;
+}
+
+#workspaces button {
+  all: initial;
+  min-width: 0;
+  padding: 6px 10px;
+  margin: 4px 2px;
+  border-radius: 6px;
+  background-color: #2e3440;
+  color: #56b6c2;
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 13px;
+  transition: all 0.2s ease-in-out;
+}
+
+#workspaces button.active {
+  color: #282c34;
+  background: linear-gradient(135deg, #61afef, #56b6c2);
+  font-weight: bold;
+}
+
+#workspaces button.urgent {
+  color: #282c34;
+  background-color: #e06c75;
+}
+
+#workspaces button:hover {
+  color: #fab387;
+  background-color: #3b4252;
+}
+
+
+/* === Window Title ======================================================== */
+
+#window {
+  color: #abb2bf;
+  padding: 0 12px;
+  margin-left: 8px;
+  font-size: 12px;
+}
+
+
+/* === Clock =============================================================== */
+
+#clock {
+  color: #fab387;
+  font-weight: bold;
+  font-size: 13px;
+  padding: 0 16px;
+}
+
+
+/* === Module Container Styling ============================================ */
+
+#cpu,
+#memory,
+#battery,
+#network,
+#pulseaudio,
+#tray {
+  padding: 4px 12px;
+  margin: 4px 3px;
+  background-color: #2e3440;
+  border: 2px solid #3b4252;
+  border-radius: 6px;
+  color: #abb2bf;
+  transition: all 0.2s ease-in-out;
+}
+
+
+/* === CPU ================================================================= */
+
+#cpu {
+  color: #61afef;
+}
+
+
+/* === Memory ============================================================== */
+
+#memory {
+  color: #c678dd;
+}
+
+
+/* === Audio =============================================================== */
+
+#pulseaudio {
+  color: #56b6c2;
+}
+
+#pulseaudio.muted {
+  background-color: #e06c75;
+  color: #282c34;
+}
+
+
+/* === Network ============================================================= */
+
+#network {
+  color: #98c379;
+}
+
+#network.disconnected {
+  background-color: #e06c75;
+  color: #282c34;
+}
+
+
+/* === Battery ============================================================= */
+
+#battery {
+  color: #98c379;
+}
+
+#battery.warning {
+  color: #e5c07b;
+}
+
+#battery.critical {
+  background-color: #e06c75;
+  color: #282c34;
+  animation: pulse 1s ease-in-out infinite;
+}
+
+#battery.charging,
+#battery.plugged {
+  color: #98c379;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+
+/* === Tray ================================================================ */
+
+#tray {
+  margin-right: 6px;
+  padding: 4px 8px;
+}
+
+#tray > .passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+  -gtk-icon-effect: highlight;
+  background-color: #e06c75;
+}
+
+
+/* === Hover Effects ======================================================= */
+
+#cpu:hover,
+#memory:hover,
+#pulseaudio:hover,
+#network:hover,
+#battery:hover,
+#clock:hover,
+#tray:hover {
+  background-color: #3b4252;
+  border-color: #56b6c2;
+  color: #56b6c2;
+}
+
+
+/* === Tooltips ============================================================ */
+
+tooltip {
+  background-color: #2e3440;
+  border: 2px solid #61afef;
+  border-radius: 8px;
+}
+
+tooltip label {
+  color: #abb2bf;
+  padding: 8px;
+}

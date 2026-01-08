@@ -1,0 +1,177 @@
+/* Kanagawa-inspired Waybar Theme */
+/* Matches your Alacritty colorscheme */
+
+@define-color bg #1f1f28;
+@define-color bg-dark #16161d;
+@define-color fg #dcd7ba;
+@define-color fg-dim #c8c093;
+@define-color black #090618;
+@define-color red #c34043;
+@define-color green #76946a;
+@define-color yellow #c0a36e;
+@define-color blue #7e9cd8;
+@define-color magenta #957fb8;
+@define-color cyan #6a9589;
+@define-color white #c8c093;
+@define-color bright-green #98bb6c;
+@define-color bright-blue #7fb4ca;
+@define-color orange #ffa066;
+@define-color selection #2d4f67;
+
+* {
+    font-family: "JetBrainsMono Nerd Font", "Symbols Nerd Font", sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    min-height: 0;
+}
+
+window#waybar {
+    background: transparent;
+}
+
+window#waybar > box {
+    background: alpha(@bg, 0.92);
+    border: 2px solid alpha(@cyan, 0.6);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Reset default styling */
+button {
+    box-shadow: none;
+    border: none;
+    background: transparent;
+}
+
+button:hover {
+    background: alpha(@selection, 0.5);
+    border-radius: 8px;
+}
+
+/* Workspaces */
+#workspaces {
+    margin-left: 8px;
+    padding: 0 4px;
+}
+
+#workspaces button {
+    color: @fg-dim;
+    padding: 4px 10px;
+    margin: 4px 2px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+#workspaces button.active {
+    color: @bg;
+    background: linear-gradient(135deg, @cyan, @bright-green);
+    font-weight: bold;
+}
+
+#workspaces button.urgent {
+    color: @bg;
+    background: @red;
+}
+
+#workspaces button:hover {
+    color: @fg;
+    background: alpha(@selection, 0.7);
+}
+
+/* Window title */
+#window {
+    color: @fg-dim;
+    padding: 0 12px;
+    margin-left: 8px;
+}
+
+/* Center clock */
+#clock {
+    color: @fg;
+    font-weight: 600;
+    padding: 0 16px;
+}
+
+/* Right modules container styling */
+#cpu,
+#memory,
+#battery,
+#network,
+#pulseaudio,
+#tray {
+    padding: 0 12px;
+    margin: 4px 2px;
+    border-radius: 8px;
+    color: @fg;
+}
+
+#cpu {
+    color: @bright-blue;
+}
+
+#memory {
+    color: @magenta;
+}
+
+#pulseaudio {
+    color: @cyan;
+}
+
+#pulseaudio.muted {
+    color: @fg-dim;
+}
+
+#network {
+    color: @bright-green;
+}
+
+#network.disconnected {
+    color: @red;
+}
+
+#battery {
+    color: @green;
+}
+
+#battery.warning {
+    color: @yellow;
+}
+
+#battery.critical {
+    color: @red;
+    animation: pulse 1s ease-in-out infinite;
+}
+
+#battery.charging {
+    color: @bright-green;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+#tray {
+    margin-right: 8px;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: @red;
+}
+
+/* Tooltip styling */
+tooltip {
+    background: @bg-dark;
+    border: 1px solid @cyan;
+    border-radius: 8px;
+}
+
+tooltip label {
+    color: @fg;
+    padding: 8px;
+}
