@@ -23,8 +23,7 @@ sleep 1
 hyprpaper &
 sleep 2
 
-# Preload and set wallpaper via hyprctl
-hyprctl hyprpaper preload "$WALLPAPER" 2>/dev/null
+
 
 # Get all monitors and set wallpaper on each
 if command -v jq &>/dev/null; then
