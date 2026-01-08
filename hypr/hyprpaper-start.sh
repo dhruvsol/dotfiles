@@ -7,11 +7,32 @@
 WALLPAPER="$HOME/.config/hypr/bg.jpeg"
 
 # Wait for Hyprland to be fully ready
-sleep 3
+wait_for_hyprland() {
+    local max_attempts=30
+    local attempt=0
+    
+    while [[ $attempt -lt $max_attempts ]]; do
+        if hyprctl monitors &>/dev/null; then
+            return 0
+        fi
+        sleep 1
+        ((attempt++))
+    done
+    return 1
+}
+
+echo "Waiting for Hyprland..."
+if ! wait_for_hyprland; then
+    echo "Hyprland not ready after 30 seconds"
+    exit 1
+fi
+
+echo "Hyprland is ready"
+sleep 2
 
 # Check if wallpaper exists
 if [[ ! -f "$WALLPAPER" ]]; then
-    notify-send "Hyprpaper" "Wallpaper not found: $WALLPAPER"
+    echo "Wallpaper not found: $WALLPAPER"
     exit 1
 fi
 
@@ -19,22 +40,16 @@ fi
 killall hyprpaper 2>/dev/null
 sleep 1
 
-# Start hyprpaper in background
+# Start hyprpaper
+echo "Starting hyprpaper..."
 hyprpaper &
-sleep 2
 
+# Wait for hyprpaper to be ready (check if socket exists)
+sleep 3
 
+# Get monitor and set wallpaper
+MONITOR=$(hyprctl monitors -j | jq -r '.[0].name' 2>/dev/null || echo "eDP-1")
+echo "Setting wallpaper on $MONITOR"
+hyprctl hyprpaper wallpaper "$MONITOR,$WALLPAPER" 2>/dev/null
 
-# Get all monitors and set wallpaper on each
-if command -v jq &>/dev/null; then
-    for monitor in $(hyprctl monitors -j | jq -r '.[].name'); do
-        hyprctl hyprpaper wallpaper "$monitor,$WALLPAPER" 2>/dev/null
-    done
-else
-    # Fallback if jq not installed - try common monitor names
-    hyprctl hyprpaper wallpaper "eDP-1,$WALLPAPER" 2>/dev/null
-    hyprctl hyprpaper wallpaper "DP-1,$WALLPAPER" 2>/dev/null
-    hyprctl hyprpaper wallpaper "HDMI-A-1,$WALLPAPER" 2>/dev/null
-fi
-
-echo "Hyprpaper started"
+echo "Done!"
