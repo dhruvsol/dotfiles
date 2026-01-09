@@ -42,7 +42,6 @@
     "memory": {
         "format": "",
         "tooltip-format": "RAM: {used:0.1f}G / {total:0.1f}G ({percentage}%)",
-        "justify": "center"
     },
     "backlight": {
         "format": "{icon}",
@@ -120,6 +119,7 @@
             "󰁹"
         ],
         "tooltip-format": "Battery: {capacity}%\n{time}",
+        "justify": "center",
         "states": {
             "full": 100,
             "good": 80,
