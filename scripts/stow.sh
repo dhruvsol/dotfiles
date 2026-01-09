@@ -26,6 +26,7 @@ PACKAGES=(
     "rofi:$CONFIG_DIR/rofi"
     "fontconfig:$CONFIG_DIR/fontconfig"
     "code:$CONFIG_DIR/Code"
+    "tmux:$CONFIG_DIR/tmux"
 )
 
 print_status() { echo -e "  ${GREEN}✓${NC} $1"; }

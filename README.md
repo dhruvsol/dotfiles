@@ -21,13 +21,11 @@ Minimal Hyprland rice with a cherry blossom twilight aesthetic.
 git clone https://github.com/yourusername/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 
-# Install dependencies (Arch)
-sudo pacman -S hyprland waybar alacritty rofi \
-    ttf-jetbrains-mono-nerd \
-    brightnessctl playerctl \
-    networkmanager pulseaudio-utils
+# Run installer (Arch-based)
+chmod +x scripts/install.sh
+./scripts/install.sh
 
-# Stow configs
+# Or manually stow configs
 chmod +x stow.sh
 ./stow.sh
 ```
@@ -87,7 +85,7 @@ dotfiles/
 - [ ] Add GTK theme to match color palette
 - [ ] Add cursor theme
 - [ ] Add zsh/starship prompt config
-- [ ] Add tmux config
+- [x] Add tmux config
 - [ ] Add neovim config
 
 ---
