@@ -49,7 +49,7 @@ Next                Next track
 Previous            Previous track
 
 # ── Tmux (inside terminal) ──────────────────────────────────────
-Alt + A             Tmux prefix
+CapsLock + A        Tmux prefix (Caps remapped to Ctrl)
 Prefix + |          Split vertical
 Prefix + -          Split horizontal
 Prefix + h/j/k/l    Navigate panes
