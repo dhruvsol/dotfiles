@@ -50,6 +50,7 @@ Previous            Previous track
 
 # ── Tmux (inside terminal) ──────────────────────────────────────
 Alt + E             Split vertical
+Alt + W             Split horizontal
 Alt + e             Cycle through panes
 Alt + t / T         Next / previous window
 Alt + h/j/k/l       Navigate panes
