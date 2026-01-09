@@ -41,7 +41,8 @@
     },
     "memory": {
         "format": "",
-        "tooltip-format": "RAM: {used:0.1f}G / {total:0.1f}G ({percentage}%)"
+        "tooltip-format": "RAM: {used:0.1f}G / {total:0.1f}G ({percentage}%)",
+        "justify": "center"
     },
     "backlight": {
         "format": "{icon}",
