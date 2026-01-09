@@ -1,6 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════
-   Sakura Night - Vertical Waybar Theme
-   Right-side bar with toggle support
+   Sakura Night - Vertical Waybar (Slim)
    ═══════════════════════════════════════════════════════════════ */
 
 @define-color bg #1a1b26;
@@ -16,157 +15,179 @@
 @define-color blue #7aa2f7;
 
 * {
-    font-family: "JetBrainsMono Nerd Font", "Symbols Nerd Font", sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    min-height: 0;
-    min-width: 0;
+  font-family: 'JetBrainsMono Nerd Font', sans-serif;
+  font-size: 13px;
+  min-height: 0;
+  min-width: 0;
 }
 
 window#waybar {
-    background: alpha(@bg, 0.85);
-    border-radius: 16px;
-    border: 2px solid alpha(@lavender, 0.4);
+  background: alpha(@bg, 0.9);
+  border-radius: 14px;
+  border: 2px solid alpha(@lavender, 0.4);
 }
 
-/* Vertical layout */
 .modules-top,
 .modules-center,
 .modules-bottom {
-    padding: 8px 4px;
+  padding: 4px 2px;
 }
 
-/* Workspaces - vertical stack */
+/* Workspaces */
 #workspaces {
-    padding: 4px;
+  padding: 4px 0;
 }
 
 #workspaces button {
-    color: @fg-dim;
-    padding: 8px 4px;
-    margin: 4px 0;
-    border-radius: 10px;
-    min-width: 30px;
-    min-height: 30px;
-    transition: all 0.2s ease;
+  color: @fg-dim;
+  padding: 6px 2px;
+  margin: 2px 0;
+  border-radius: 8px;
+  min-width: 24px;
+  min-height: 24px;
+  font-size: 14px;
 }
 
 #workspaces button.active {
-    color: @bg;
-    background: linear-gradient(180deg, @lavender, @pink);
-    font-weight: bold;
+  color: @bg;
+  background: linear-gradient(180deg, @lavender, @pink);
 }
 
 #workspaces button.urgent {
-    color: @bg;
-    background: @pink;
+  color: @bg;
+  background: @pink;
 }
 
 #workspaces button:hover {
-    color: @lavender;
-    background: alpha(@lavender, 0.2);
+  color: @lavender;
+  background: alpha(@lavender, 0.2);
 }
 
-/* Clock - vertical time display */
+/* Clock */
 #clock {
-    color: @lavender;
-    font-size: 16px;
-    font-weight: bold;
-    padding: 12px 8px;
-    letter-spacing: 2px;
+  color: @lavender;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 8px 2px;
 }
 
-/* Module icons */
+/* System group drawer */
+#custom-system-icon {
+  color: @cyan;
+  font-size: 16px;
+  padding: 6px 2px;
+}
+
+#cpu,
+#memory,
+#temperature {
+  color: @fg;
+  font-size: 12px;
+  padding: 4px 2px;
+  margin: 2px 0;
+}
+
+#cpu {
+  color: @cyan;
+}
+
+#memory {
+  color: @blue;
+}
+
+#temperature {
+  color: @peach;
+}
+
+#temperature.critical {
+  color: @pink;
+}
+
+/* Bottom modules */
 #pulseaudio,
 #network,
-#bluetooth,
 #battery,
 #tray {
-    color: @fg;
-    font-size: 18px;
-    padding: 10px 4px;
-    margin: 4px 0;
-    border-radius: 10px;
-    min-width: 30px;
-    transition: all 0.2s ease;
+  color: @fg;
+  font-size: 16px;
+  padding: 6px 2px;
+  margin: 2px 0;
+  border-radius: 8px;
 }
 
 #pulseaudio:hover,
 #network:hover,
-#bluetooth:hover,
 #battery:hover {
-    background: alpha(@lavender, 0.2);
-    color: @lavender;
+  background: alpha(@lavender, 0.15);
+  color: @lavender;
 }
 
 #pulseaudio {
-    color: @peach;
+  color: @peach;
 }
 
 #pulseaudio.muted {
-    color: @fg-dim;
+  color: @fg-dim;
 }
 
 #network {
-    color: @green;
+  color: @green;
 }
 
 #network.disconnected {
-    color: @pink;
-}
-
-#bluetooth {
-    color: @blue;
-}
-
-#bluetooth.disabled {
-    color: @fg-dim;
+  color: @pink;
 }
 
 #battery {
-    color: @green;
+  color: @green;
 }
 
 #battery.warning {
-    color: @yellow;
+  color: @yellow;
 }
 
 #battery.critical {
-    color: @pink;
-    animation: pulse 1s ease-in-out infinite;
+  color: @pink;
+  animation: pulse 1s infinite;
 }
 
 #battery.charging {
-    color: @green;
+  color: @green;
 }
 
 @keyframes pulse {
-    0% { opacity: 1; }
-    50% { opacity: 0.5; }
-    100% { opacity: 1; }
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 #tray {
-    padding: 8px 4px;
+  padding: 4px 2px;
 }
 
 #tray > .passive {
-    -gtk-icon-effect: dim;
+  -gtk-icon-effect: dim;
 }
 
 #tray > .needs-attention {
-    background: @pink;
-    border-radius: 8px;
+  background: @pink;
+  border-radius: 6px;
 }
 
 /* Tooltip */
 tooltip {
-    background: @bg-alt;
-    border: 1px solid @lavender;
-    border-radius: 10px;
+  background: @bg-alt;
+  border: 1px solid @lavender;
+  border-radius: 8px;
 }
 
 tooltip label {
-    color: @fg;
-    padding: 8px;
+  color: @fg;
+  padding: 6px;
 }

@@ -1,11 +1,11 @@
 {
   "layer": "top",
   "position": "right",
-  "width": 50,
-  "spacing": 4,
-  "margin-top": 10,
-  "margin-bottom": 10,
-  "margin-right": 10,
+  "width": 42,
+  "spacing": 2,
+  "margin-top": 8,
+  "margin-bottom": 8,
+  "margin-right": 8,
   "modules-top": [
     "hyprland/workspaces"
   ],
@@ -13,6 +13,7 @@
     "clock"
   ],
   "modules-bottom": [
+    "group/system",
     "pulseaudio",
     "network",
     "bluetooth",
@@ -22,64 +23,95 @@
   "hyprland/workspaces": {
     "format": "{icon}",
     "format-icons": {
-      "1": "一",
-      "2": "二",
-      "3": "三",
-      "4": "四",
-      "5": "五",
+      "1": "",
+      "2": "",
+      "3": "",
+      "4": "",
+      "5": "",
       "urgent": "",
       "active": "",
       "default": ""
     },
     "on-click": "activate",
     "persistent-workspaces": {
-      "*": 5
+      "*": 4
     }
   },
   "clock": {
     "format": "{:%H\n%M}",
     "format-alt": "{:%d\n%m}",
-    "tooltip-format": "<tt>{calendar}</tt>",
-    "calendar": {
-      "mode": "month",
-      "format": {
-        "today": "<span color='#bb9af7'><b>{}</b></span>"
-      }
-    }
+    "tooltip-format": "<tt>{calendar}</tt>"
+  },
+  "group/system": {
+    "orientation": "vertical",
+    "drawer": {
+      "transition-duration": 300,
+      "transition-left-to-right": false
+    },
+    "modules": [
+      "custom/system-icon",
+      "cpu",
+      "memory",
+      "disk"
+    ]
+  },
+  "custom/system-icon": {
+    "format": "",
+    "tooltip-format": "System Stats"
+  },
+  "cpu": {
+    "format": "",
+    "tooltip-format": "CPU: {usage}%"
+  },
+  "memory": {
+    "format": "",
+    "tooltip-format": "RAM: {percentage}%\n{used:0.1f}G / {total:0.1f}G"
+  },
+  "disk": {
+    "format": "󰋊",
+    "tooltip-format": "Disk: {percentage_used}%\n{used} / {total}"
   },
   "pulseaudio": {
     "format": "{icon}",
-    "format-muted": "󰖁",
+    "format-muted": "󰝟",
     "format-icons": {
+      "headphone": "󰋋",
+      "headset": "󰋎",
       "default": [
         "󰕿",
         "󰖀",
         "󰕾"
       ]
     },
-    "tooltip-format": "{volume}%",
-    "on-click": "pavucontrol"
+    "tooltip-format": "Volume: {volume}%",
+    "on-click": "pavucontrol",
+    "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
   },
   "network": {
-    "format-wifi": "󰤨",
-    "format-ethernet": "󰈀",
-    "format-disconnected": "󰤭",
-    "tooltip-format-wifi": "{essid} ({signalStrength}%)",
-    "tooltip-format-ethernet": "{ifname}",
+    "format-wifi": "󰖩",
+    "format-ethernet": "󰈁",
+    "format-disconnected": "󰖪",
+    "tooltip-format-wifi": "  {essid}\n󰢮  {signalStrength}%\n󰩟  {ipaddr}",
+    "tooltip-format-ethernet": "󰈁  {ifname}\n󰩟  {ipaddr}",
+    "tooltip-format-disconnected": "󰖪  Disconnected",
     "on-click": "nm-connection-editor"
   },
   "bluetooth": {
     "format": "󰂯",
     "format-disabled": "󰂲",
     "format-connected": "󰂱",
+    "format-connected-battery": "󰂱 {device_battery_percentage}%",
     "tooltip-format": "{status}",
+    "tooltip-format-connected": "󰂱 {device_alias}",
     "on-click": "blueman-manager"
   },
   "battery": {
     "format": "{icon}",
-    "format-charging": "󰂄",
+    "format-charging": "󱐋",
     "format-plugged": "󰚥",
+    "format-full": "󱟢",
     "format-icons": [
+      "󱃍",
       "󰁺",
       "󰁻",
       "󰁼",
@@ -91,10 +123,14 @@
       "󰂂",
       "󰁹"
     ],
-    "tooltip-format": "{capacity}% - {time}"
+    "tooltip-format": "  {capacity}%\n󱧥  {time}",
+    "states": {
+      "warning": 30,
+      "critical": 15
+    }
   },
   "tray": {
-    "icon-size": 18,
-    "spacing": 8
+    "icon-size": 16,
+    "spacing": 6
   }
 }
