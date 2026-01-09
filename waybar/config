@@ -38,9 +38,9 @@
 
     "pulseaudio": {
         "format": "{icon}",
-        "format-muted": "",
+        "format-muted": "󰝟",
         "format-icons": {
-            "default": ["", "", ""]
+            "default": ["󰕿", "󰖀", "󰕾"]
         },
         "tooltip-format": "Volume: {volume}%",
         "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
@@ -50,9 +50,9 @@
     },
 
     "network": {
-        "format-wifi": "",
-        "format-ethernet": "",
-        "format-disconnected": "",
+        "format-wifi": "󰖩",
+        "format-ethernet": "󰈁",
+        "format-disconnected": "󰖪",
         "tooltip-format-wifi": "{essid} ({signalStrength}%)\nIP: {ipaddr}",
         "tooltip-format-disconnected": "Disconnected",
         "on-click": "nm-connection-editor"
@@ -60,9 +60,9 @@
 
     "battery": {
         "format": "{icon}",
-        "format-charging": "",
-        "format-plugged": "",
-        "format-icons": ["", "", "", "", ""],
+        "format-charging": "󱐋",
+        "format-plugged": "󱐋",
+        "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰁹"],
         "tooltip-format": "Battery: {capacity}%\n{time}",
         "states": {
             "warning": 30,
