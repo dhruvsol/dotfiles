@@ -1,62 +1,48 @@
-/* ═══════════════════════════════════════════════════════════════
-   Sakura Night - Rofi Theme
-   Inspired by mystical cherry blossom twilight
-   ═══════════════════════════════════════════════════════════════ */
+/* Sakura Night - Compact Rofi Theme */
 
-/* === Color Palette === */
 * {
     bg:          #1a1b26;
     bg-alt:      #15141b;
     bg-selected: #33467c;
-    bg-float:    #24283b;
     fg:          #c0caf5;
-    fg-alt:      #a9b1d6;
     fg-dim:      #565f89;
     accent:      #bb9af7;
-    accent-alt:  #7dcfff;
     pink:        #f7768e;
-    peach:       #ff9e64;
-    green:       #9ece6a;
-    urgent:      #f7768e;
-    warning:     #e0af68;
 
-    font: "JetBrainsMono Nerd Font 11";
+    font: "JetBrainsMono Nerd Font 10";
     background-color: transparent;
     text-color: @fg;
-    padding: 0px;
-    margin: 0px;
+    padding: 0;
+    margin: 0;
 }
 
-/* === Window === */
 window {
-    width: 680px;
+    width: 400px;
     location: center;
     anchor: center;
-    border: 2px solid;
+    border: 1px solid;
     border-color: @accent;
-    border-radius: 14px;
+    border-radius: 6px;
     background-color: @bg;
 }
 
-/* === Main Layout === */
 mainbox {
-    children: [ inputbar, message, listview ];
-    spacing: 0px;
-    padding: 0px;
+    children: [ inputbar, listview ];
+    spacing: 0;
+    padding: 0;
 }
 
-/* === Input Bar === */
 inputbar {
     children: [ prompt, entry ];
-    padding: 16px;
+    padding: 10px 12px;
     background-color: @bg-alt;
-    border-radius: 12px 12px 0 0;
+    border-radius: 6px 6px 0 0;
 }
 
 prompt {
-    padding: 0 10px 0 4px;
+    padding: 0 8px 0 0;
     text-color: @accent;
-    font: "JetBrainsMono Nerd Font Bold 12";
+    font: "JetBrainsMono Nerd Font Bold 10";
 }
 
 entry {
@@ -66,33 +52,21 @@ entry {
     cursor: text;
 }
 
-/* === Message === */
-message {
-    padding: 10px 16px;
-    background-color: @bg-float;
-}
-
-textbox {
-    text-color: @warning;
-}
-
-/* === List View === */
 listview {
-    lines: 8;
+    lines: 6;
     columns: 1;
     fixed-height: true;
-    padding: 10px;
-    spacing: 6px;
+    padding: 6px;
+    spacing: 4px;
     scrollbar: false;
     background-color: @bg;
-    border-radius: 0 0 12px 12px;
+    border-radius: 0 0 6px 6px;
 }
 
-/* === Elements === */
 element {
-    padding: 12px 16px;
-    spacing: 12px;
-    border-radius: 10px;
+    padding: 8px 10px;
+    spacing: 8px;
+    border-radius: 4px;
     cursor: pointer;
 }
 
@@ -101,52 +75,17 @@ element normal.normal {
     text-color: @fg;
 }
 
-element normal.urgent {
-    background-color: @urgent;
-    text-color: @bg;
-}
-
-element normal.active {
-    background-color: @accent;
-    text-color: @bg;
-}
-
 element selected.normal {
     background-color: @bg-selected;
     text-color: @accent;
-    border: 1px solid;
-    border-color: @accent;
-}
-
-element selected.urgent {
-    background-color: @urgent;
-    text-color: @bg;
-}
-
-element selected.active {
-    background-color: @accent;
-    text-color: @bg;
-}
-
-element alternate.normal {
-    background-color: transparent;
-    text-color: @fg;
 }
 
 element-icon {
-    size: 26px;
+    size: 20px;
     cursor: inherit;
 }
 
 element-text {
     cursor: inherit;
     vertical-align: 0.5;
-}
-
-/* === Scrollbar === */
-scrollbar {
-    width: 4px;
-    handle-width: 4px;
-    handle-color: @accent;
-    border-radius: 4px;
 }

@@ -80,7 +80,7 @@ stow_all() {
             print_warn "$pkg not found, skipping"
         fi
     done
-    
+
     echo -e "\n${GREEN}✓ All done!${NC}\n"
 }
 
@@ -97,13 +97,13 @@ unstow_all() {
                 print_status "$pkg removed" || true
         fi
     done
-    
+
     echo -e "\n${GREEN}✓ All done!${NC}\n"
 }
 
 list_packages() {
     header "Dotfiles packages"
-    
+
     for entry in "${PACKAGES[@]}"; do
         pkg="${entry%%:*}"
         target="${entry##*:}"
