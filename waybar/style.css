@@ -1,174 +1,119 @@
-/* ═══════════════════════════════════════════════════════════════
-   Sakura Night - Vertical Waybar (Slim)
-   ═══════════════════════════════════════════════════════════════ */
-
-@define-color bg #1a1b26;
-@define-color bg-alt #15141b;
-@define-color fg #c0caf5;
-@define-color fg-dim #565f89;
-@define-color lavender #bb9af7;
-@define-color pink #f7768e;
-@define-color cyan #7dcfff;
-@define-color green #9ece6a;
-@define-color yellow #e0af68;
-@define-color peach #ff9e64;
-@define-color blue #7aa2f7;
+/* Sakura Night - Vertical Waybar */
 
 * {
-  font-family: 'JetBrainsMono Nerd Font', sans-serif;
-  font-size: 13px;
+  font-family: 'JetBrainsMono Nerd Font', 'Font Awesome 6 Free', sans-serif;
+  font-size: 14px;
+  border: none;
+  border-radius: 0;
   min-height: 0;
-  min-width: 0;
 }
 
 window#waybar {
-  background: alpha(@bg, 0.9);
+  background: rgba(26, 27, 38, 0.9);
   border-radius: 14px;
-  border: 2px solid alpha(@lavender, 0.4);
+  border: 2px solid rgba(187, 154, 247, 0.4);
+  color: #c0caf5;
 }
 
-.modules-top,
-.modules-center,
-.modules-bottom {
-  padding: 4px 2px;
+window#waybar.hidden {
+  opacity: 0.2;
 }
 
-/* Workspaces */
-#workspaces {
-  padding: 4px 0;
-}
-
-#workspaces button {
-  color: @fg-dim;
-  padding: 6px 2px;
-  margin: 2px 0;
-  border-radius: 8px;
-  min-width: 24px;
-  min-height: 24px;
-  font-size: 14px;
-}
-
-#workspaces button.active {
-  color: @bg;
-  background: linear-gradient(180deg, @lavender, @pink);
-}
-
-#workspaces button.urgent {
-  color: @bg;
-  background: @pink;
-}
-
-#workspaces button:hover {
-  color: @lavender;
-  background: alpha(@lavender, 0.2);
-}
-
-/* Clock */
-#clock {
-  color: @lavender;
-  font-size: 14px;
-  font-weight: bold;
-  padding: 8px 2px;
-}
-
-/* System group drawer */
-#custom-system-icon {
-  color: @cyan;
-  font-size: 16px;
-  padding: 6px 2px;
-}
-
+/* For vertical bar - stack items */
+#workspaces,
+#clock,
 #cpu,
 #memory,
-#temperature {
-  color: @fg;
-  font-size: 12px;
-  padding: 4px 2px;
-  margin: 2px 0;
-}
-
-#cpu {
-  color: @cyan;
-}
-
-#memory {
-  color: @blue;
-}
-
-#temperature {
-  color: @peach;
-}
-
-#temperature.critical {
-  color: @pink;
-}
-
-/* Bottom modules */
 #pulseaudio,
 #network,
 #battery,
 #tray {
-  color: @fg;
-  font-size: 16px;
-  padding: 6px 2px;
-  margin: 2px 0;
-  border-radius: 8px;
+  padding: 8px 4px;
+  margin: 2px 4px;
 }
 
-#pulseaudio:hover,
-#network:hover,
-#battery:hover {
-  background: alpha(@lavender, 0.15);
-  color: @lavender;
+/* Workspaces */
+#workspaces button {
+  color: #565f89;
+  padding: 4px;
+  margin: 2px 0;
+  border-radius: 8px;
+  background: transparent;
+}
+
+#workspaces button.active {
+  color: #1a1b26;
+  background: linear-gradient(180deg, #bb9af7, #f7768e);
+}
+
+#workspaces button.urgent {
+  color: #1a1b26;
+  background: #f7768e;
+}
+
+#workspaces button:hover {
+  color: #bb9af7;
+  background: rgba(187, 154, 247, 0.2);
+}
+
+/* Clock */
+#clock {
+  color: #bb9af7;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+/* System modules */
+#cpu {
+  color: #7dcfff;
+}
+
+#memory {
+  color: #7aa2f7;
 }
 
 #pulseaudio {
-  color: @peach;
+  color: #ff9e64;
 }
 
 #pulseaudio.muted {
-  color: @fg-dim;
+  color: #565f89;
 }
 
 #network {
-  color: @green;
+  color: #9ece6a;
 }
 
 #network.disconnected {
-  color: @pink;
+  color: #f7768e;
 }
 
 #battery {
-  color: @green;
+  color: #9ece6a;
 }
 
 #battery.warning {
-  color: @yellow;
+  color: #e0af68;
 }
 
 #battery.critical {
-  color: @pink;
-  animation: pulse 1s infinite;
+  color: #f7768e;
+  animation: blink 1s infinite;
 }
 
 #battery.charging {
-  color: @green;
+  color: #9ece6a;
 }
 
-@keyframes pulse {
-  0% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.5;
-  }
-  100% {
-    opacity: 1;
+@keyframes blink {
+  to {
+    color: #f7768e;
+    background: rgba(247, 118, 142, 0.2);
   }
 }
 
 #tray {
-  padding: 4px 2px;
+  padding: 4px;
 }
 
 #tray > .passive {
@@ -176,18 +121,17 @@ window#waybar {
 }
 
 #tray > .needs-attention {
-  background: @pink;
+  background: #f7768e;
   border-radius: 6px;
 }
 
-/* Tooltip */
 tooltip {
-  background: @bg-alt;
-  border: 1px solid @lavender;
+  background: #15141b;
+  border: 1px solid #bb9af7;
   border-radius: 8px;
 }
 
 tooltip label {
-  color: @fg;
+  color: #c0caf5;
   padding: 6px;
 }

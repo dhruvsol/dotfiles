@@ -1,22 +1,22 @@
 {
   "layer": "top",
   "position": "right",
-  "width": 42,
-  "spacing": 2,
+  "width": 44,
+  "spacing": 4,
   "margin-top": 8,
   "margin-bottom": 8,
   "margin-right": 8,
-  "modules-top": [
+  "modules-left": [
     "hyprland/workspaces"
   ],
   "modules-center": [
     "clock"
   ],
-  "modules-bottom": [
-    "group/system",
+  "modules-right": [
+    "cpu",
+    "memory",
     "pulseaudio",
     "network",
-    "bluetooth",
     "battery",
     "tray"
   ],
@@ -40,43 +40,21 @@
   "clock": {
     "format": "{:%H\n%M}",
     "format-alt": "{:%d\n%m}",
-    "tooltip-format": "<tt>{calendar}</tt>"
-  },
-  "group/system": {
-    "orientation": "vertical",
-    "drawer": {
-      "transition-duration": 300,
-      "transition-left-to-right": false
-    },
-    "modules": [
-      "custom/system-icon",
-      "cpu",
-      "memory",
-      "disk"
-    ]
-  },
-  "custom/system-icon": {
-    "format": "",
-    "tooltip-format": "System Stats"
+    "tooltip-format": "{:%A, %B %d, %Y}"
   },
   "cpu": {
     "format": "",
-    "tooltip-format": "CPU: {usage}%"
+    "tooltip-format": "CPU: {usage}%",
+    "interval": 2
   },
   "memory": {
     "format": "",
     "tooltip-format": "RAM: {percentage}%\n{used:0.1f}G / {total:0.1f}G"
   },
-  "disk": {
-    "format": "󰋊",
-    "tooltip-format": "Disk: {percentage_used}%\n{used} / {total}"
-  },
   "pulseaudio": {
     "format": "{icon}",
     "format-muted": "󰝟",
     "format-icons": {
-      "headphone": "󰋋",
-      "headset": "󰋎",
       "default": [
         "󰕿",
         "󰖀",
@@ -84,34 +62,21 @@
       ]
     },
     "tooltip-format": "Volume: {volume}%",
-    "on-click": "pavucontrol",
-    "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+    "on-click": "pavucontrol"
   },
   "network": {
     "format-wifi": "󰖩",
     "format-ethernet": "󰈁",
     "format-disconnected": "󰖪",
-    "tooltip-format-wifi": "  {essid}\n󰢮  {signalStrength}%\n󰩟  {ipaddr}",
-    "tooltip-format-ethernet": "󰈁  {ifname}\n󰩟  {ipaddr}",
-    "tooltip-format-disconnected": "󰖪  Disconnected",
+    "tooltip-format-wifi": "{essid} ({signalStrength}%)",
+    "tooltip-format-disconnected": "Disconnected",
     "on-click": "nm-connection-editor"
-  },
-  "bluetooth": {
-    "format": "󰂯",
-    "format-disabled": "󰂲",
-    "format-connected": "󰂱",
-    "format-connected-battery": "󰂱 {device_battery_percentage}%",
-    "tooltip-format": "{status}",
-    "tooltip-format-connected": "󰂱 {device_alias}",
-    "on-click": "blueman-manager"
   },
   "battery": {
     "format": "{icon}",
     "format-charging": "󱐋",
     "format-plugged": "󰚥",
-    "format-full": "󱟢",
     "format-icons": [
-      "󱃍",
       "󰁺",
       "󰁻",
       "󰁼",
@@ -123,7 +88,7 @@
       "󰂂",
       "󰁹"
     ],
-    "tooltip-format": "  {capacity}%\n󱧥  {time}",
+    "tooltip-format": "{capacity}% - {time}",
     "states": {
       "warning": 30,
       "critical": 15
