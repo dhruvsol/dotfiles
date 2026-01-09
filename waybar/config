@@ -1,37 +1,24 @@
-// ═══════════════════════════════════════════════════════════════
-//  Waybar Configuration - Sakura Night
-//  Inspired by mystical cherry blossom twilight
-// ═══════════════════════════════════════════════════════════════
-
 {
   "layer": "top",
-  "position": "top",
-  "height": 36,
-  "margin-top": 8,
-  "margin-left": 12,
-  "margin-right": 12,
-  "spacing": 0,
-
-  // ── Modules Layout ───────────────────────────────────────────────
-  "modules-left": [
-    "hyprland/workspaces",
-    "hyprland/window"
+  "position": "right",
+  "width": 50,
+  "spacing": 4,
+  "margin-top": 10,
+  "margin-bottom": 10,
+  "margin-right": 10,
+  "modules-top": [
+    "hyprland/workspaces"
   ],
-
   "modules-center": [
     "clock"
   ],
-
-  "modules-right": [
+  "modules-bottom": [
     "pulseaudio",
     "network",
-    "cpu",
-    "memory",
+    "bluetooth",
     "battery",
     "tray"
   ],
-
-  // ── Workspaces ───────────────────────────────────────────────────
   "hyprland/workspaces": {
     "format": "{icon}",
     "format-icons": {
@@ -40,106 +27,74 @@
       "3": "三",
       "4": "四",
       "5": "五",
-      "6": "六",
-      "7": "七",
-      "8": "八",
-      "9": "九",
-      "10": "十",
-      "urgent": "󰗖",
-      "active": "󰝥",
-      "default": "󰧞"
+      "urgent": "",
+      "active": "",
+      "default": ""
     },
     "on-click": "activate",
     "persistent-workspaces": {
       "*": 5
     }
   },
-
-  // ── Window ───────────────────────────────────────────────────────
-  "hyprland/window": {
-    "format": "{}",
-    "max-length": 35,
-    "separate-outputs": true,
-    "rewrite": {
-      "(.*) — Mozilla Firefox": "󰈹  $1",
-      "(.*) - Visual Studio Code": "󰨞  $1",
-      "(.*) - Cursor": "󰨞  $1",
-      "": "󰇄  Desktop"
-    }
-  },
-
-  // ── Clock ────────────────────────────────────────────────────────
   "clock": {
-    "format": "[   {:%I:%M %p} ]",
-    "format-alt": "  {:%A, %B %d, %Y}",
-    "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    "format": "{:%H\n%M}",
+    "format-alt": "{:%d\n%m}",
+    "tooltip-format": "<tt>{calendar}</tt>",
     "calendar": {
-      "mode": "year",
-      "mode-mon-col": 3,
-      "weeks-pos": "right",
-      "on-scroll": 1,
+      "mode": "month",
       "format": {
-        "months": "<span color='#bb9af7'><b>{}</b></span>",
-        "days": "<span color='#a9b1d6'>{}</span>",
-        "weeks": "<span color='#7dcfff'>W{}</span>",
-        "weekdays": "<span color='#e0af68'>{}</span>",
-        "today": "<span color='#f7768e'><b><u>{}</u></b></span>"
+        "today": "<span color='#bb9af7'><b>{}</b></span>"
       }
     }
   },
-
-  // ── CPU ──────────────────────────────────────────────────────────
-  "cpu": {
-    "format": "  {usage}%",
-    "tooltip": true,
-    "interval": 2
-  },
-
-  // ── Memory ───────────────────────────────────────────────────────
-  "memory": {
-    "format": "  {}%",
-    "tooltip-format": "{used:0.1f}GB / {total:0.1f}GB"
-  },
-
-  // ── Battery ──────────────────────────────────────────────────────
-  "battery": {
-    "states": {
-      "warning": 30,
-      "critical": 15
+  "pulseaudio": {
+    "format": "{icon}",
+    "format-muted": "󰖁",
+    "format-icons": {
+      "default": [
+        "󰕿",
+        "󰖀",
+        "󰕾"
+      ]
     },
-    "format": "{icon}  {capacity}%",
-    "format-charging": "󰂄  {capacity}%",
-    "format-plugged": "󰚥  {capacity}%",
-    "format-full": "󰁹  Full",
-    "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+    "tooltip-format": "{volume}%",
+    "on-click": "pavucontrol"
   },
-
-  // ── Network ──────────────────────────────────────────────────────
   "network": {
-    "format-wifi": "{icon}  {signalStrength}%",
-    "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
-    "format-ethernet": "󰀂  {ipaddr}",
-    "format-disconnected": "󰤭  Off",
-    "tooltip-format-wifi": "  {essid}\n󰩟  {ipaddr}/{cidr}\n⇣{bandwidthDownBytes} ⇡{bandwidthUpBytes}",
-    "tooltip-format-ethernet": "󰀂  {ifname}\n󰩟  {ipaddr}/{cidr}",
+    "format-wifi": "󰤨",
+    "format-ethernet": "󰈀",
+    "format-disconnected": "󰤭",
+    "tooltip-format-wifi": "{essid} ({signalStrength}%)",
+    "tooltip-format-ethernet": "{ifname}",
     "on-click": "nm-connection-editor"
   },
-
-  // ── Audio ────────────────────────────────────────────────────────
-  "pulseaudio": {
-    "format": "{icon}  {volume}%",
-    "format-muted": "󰖁  muted",
-    "format-icons": {
-      "default": ["󰕿", "󰖀", "󰕾"]
-    },
-    "on-click": "pavucontrol",
-    "on-scroll-up": "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+",
-    "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+  "bluetooth": {
+    "format": "󰂯",
+    "format-disabled": "󰂲",
+    "format-connected": "󰂱",
+    "tooltip-format": "{status}",
+    "on-click": "blueman-manager"
   },
-
-  // ── Tray ─────────────────────────────────────────────────────────
+  "battery": {
+    "format": "{icon}",
+    "format-charging": "󰂄",
+    "format-plugged": "󰚥",
+    "format-icons": [
+      "󰁺",
+      "󰁻",
+      "󰁼",
+      "󰁽",
+      "󰁾",
+      "󰁿",
+      "󰂀",
+      "󰂁",
+      "󰂂",
+      "󰁹"
+    ],
+    "tooltip-format": "{capacity}% - {time}"
+  },
   "tray": {
-    "icon-size": 16,
+    "icon-size": 18,
     "spacing": 8
   }
 }

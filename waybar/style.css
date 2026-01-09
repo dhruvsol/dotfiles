@@ -1,214 +1,172 @@
 /* ═══════════════════════════════════════════════════════════════
-   Sakura Night - Waybar Theme
-   Inspired by mystical cherry blossom twilight
+   Sakura Night - Vertical Waybar Theme
+   Right-side bar with toggle support
    ═══════════════════════════════════════════════════════════════ */
 
-/* === Base Styling === */
+@define-color bg #1a1b26;
+@define-color bg-alt #15141b;
+@define-color fg #c0caf5;
+@define-color fg-dim #565f89;
+@define-color lavender #bb9af7;
+@define-color pink #f7768e;
+@define-color cyan #7dcfff;
+@define-color green #9ece6a;
+@define-color yellow #e0af68;
+@define-color peach #ff9e64;
+@define-color blue #7aa2f7;
 
 * {
-  border: none;
-  border-radius: 0;
-  min-height: 0;
-  font-family: "JetBrainsMono Nerd Font", "Symbols Nerd Font", monospace;
-  font-size: 13px;
-  font-weight: 500;
+    font-family: "JetBrainsMono Nerd Font", "Symbols Nerd Font", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    min-height: 0;
+    min-width: 0;
 }
 
 window#waybar {
-  background: #1a1b26;
-  border: 2px solid #bb9af7;
-  border-radius: 10px;
-  opacity: 0.94;
-  transition: background-color 0.3s ease;
+    background: alpha(@bg, 0.85);
+    border-radius: 16px;
+    border: 2px solid alpha(@lavender, 0.4);
 }
 
-window#waybar.hidden {
-  opacity: 0.2;
+/* Vertical layout */
+.modules-top,
+.modules-center,
+.modules-bottom {
+    padding: 8px 4px;
 }
 
-
-/* === Workspaces === */
-
+/* Workspaces - vertical stack */
 #workspaces {
-  background-color: transparent;
-  margin-left: 6px;
+    padding: 4px;
 }
 
 #workspaces button {
-  all: initial;
-  min-width: 0;
-  padding: 6px 10px;
-  margin: 4px 2px;
-  border-radius: 8px;
-  background-color: #24283b;
-  color: #7dcfff;
-  font-family: "JetBrainsMono Nerd Font";
-  font-size: 13px;
-  transition: all 0.2s ease-in-out;
+    color: @fg-dim;
+    padding: 8px 4px;
+    margin: 4px 0;
+    border-radius: 10px;
+    min-width: 30px;
+    min-height: 30px;
+    transition: all 0.2s ease;
 }
 
 #workspaces button.active {
-  color: #1a1b26;
-  background: linear-gradient(135deg, #bb9af7, #f7768e);
-  font-weight: bold;
+    color: @bg;
+    background: linear-gradient(180deg, @lavender, @pink);
+    font-weight: bold;
 }
 
 #workspaces button.urgent {
-  color: #1a1b26;
-  background-color: #f7768e;
+    color: @bg;
+    background: @pink;
 }
 
 #workspaces button:hover {
-  color: #ff9e64;
-  background-color: #33467c;
+    color: @lavender;
+    background: alpha(@lavender, 0.2);
 }
 
-
-/* === Window Title === */
-
-#window {
-  color: #a9b1d6;
-  padding: 0 12px;
-  margin-left: 8px;
-  font-size: 12px;
-}
-
-
-/* === Clock === */
-
+/* Clock - vertical time display */
 #clock {
-  color: #bb9af7;
-  font-weight: bold;
-  font-size: 13px;
-  padding: 0 16px;
+    color: @lavender;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 12px 8px;
+    letter-spacing: 2px;
 }
 
-
-/* === Module Container Styling === */
-
-#cpu,
-#memory,
-#battery,
-#network,
+/* Module icons */
 #pulseaudio,
+#network,
+#bluetooth,
+#battery,
 #tray {
-  padding: 4px 12px;
-  margin: 4px 3px;
-  background-color: #24283b;
-  border: 2px solid #33467c;
-  border-radius: 8px;
-  color: #c0caf5;
-  transition: all 0.2s ease-in-out;
+    color: @fg;
+    font-size: 18px;
+    padding: 10px 4px;
+    margin: 4px 0;
+    border-radius: 10px;
+    min-width: 30px;
+    transition: all 0.2s ease;
 }
 
-
-/* === CPU === */
-
-#cpu {
-  color: #7dcfff;
+#pulseaudio:hover,
+#network:hover,
+#bluetooth:hover,
+#battery:hover {
+    background: alpha(@lavender, 0.2);
+    color: @lavender;
 }
-
-
-/* === Memory === */
-
-#memory {
-  color: #7aa2f7;
-}
-
-
-/* === Audio === */
 
 #pulseaudio {
-  color: #ff9e64;
+    color: @peach;
 }
 
 #pulseaudio.muted {
-  background-color: #f7768e;
-  color: #1a1b26;
+    color: @fg-dim;
 }
 
-
-/* === Network === */
-
 #network {
-  color: #9ece6a;
+    color: @green;
 }
 
 #network.disconnected {
-  background-color: #f7768e;
-  color: #1a1b26;
+    color: @pink;
 }
 
+#bluetooth {
+    color: @blue;
+}
 
-/* === Battery === */
+#bluetooth.disabled {
+    color: @fg-dim;
+}
 
 #battery {
-  color: #9ece6a;
+    color: @green;
 }
 
 #battery.warning {
-  color: #e0af68;
+    color: @yellow;
 }
 
 #battery.critical {
-  background-color: #f7768e;
-  color: #1a1b26;
-  animation: pulse 1s ease-in-out infinite;
+    color: @pink;
+    animation: pulse 1s ease-in-out infinite;
 }
 
-#battery.charging,
-#battery.plugged {
-  color: #9ece6a;
+#battery.charging {
+    color: @green;
 }
 
 @keyframes pulse {
-  0% { opacity: 1; }
-  50% { opacity: 0.6; }
-  100% { opacity: 1; }
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
 }
 
-
-/* === Tray === */
-
 #tray {
-  margin-right: 6px;
-  padding: 4px 8px;
+    padding: 8px 4px;
 }
 
 #tray > .passive {
-  -gtk-icon-effect: dim;
+    -gtk-icon-effect: dim;
 }
 
 #tray > .needs-attention {
-  -gtk-icon-effect: highlight;
-  background-color: #f7768e;
+    background: @pink;
+    border-radius: 8px;
 }
 
-
-/* === Hover Effects === */
-
-#cpu:hover,
-#memory:hover,
-#pulseaudio:hover,
-#network:hover,
-#battery:hover,
-#clock:hover,
-#tray:hover {
-  background-color: #33467c;
-  border-color: #bb9af7;
-  color: #bb9af7;
-}
-
-
-/* === Tooltips === */
-
+/* Tooltip */
 tooltip {
-  background-color: #15141b;
-  border: 2px solid #bb9af7;
-  border-radius: 10px;
+    background: @bg-alt;
+    border: 1px solid @lavender;
+    border-radius: 10px;
 }
 
 tooltip label {
-  color: #c0caf5;
-  padding: 8px;
+    color: @fg;
+    padding: 8px;
 }
