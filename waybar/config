@@ -6,11 +6,22 @@
     "margin-top": 6,
     "margin-bottom": 6,
     "margin-right": 6,
-
-    "modules-left": ["hyprland/workspaces"],
-    "modules-center": ["clock"],
-    "modules-right": ["cpu", "memory", "backlight", "pulseaudio", "mpris", "network", "battery", "tray"],
-
+    "modules-left": [
+        "hyprland/workspaces"
+    ],
+    "modules-center": [
+        "clock"
+    ],
+    "modules-right": [
+        "cpu",
+        "memory",
+        "backlight",
+        "pulseaudio",
+        "mpris",
+        "network",
+        "battery",
+        "tray"
+    ],
     "hyprland/workspaces": {
         "format": "{name}",
         "on-click": "activate",
@@ -18,39 +29,42 @@
             "*": 4
         }
     },
-
     "clock": {
         "format": "{:%H\n%M}",
         "format-alt": "{:%d\n%m}",
         "tooltip-format": "{:%A, %B %d, %Y}"
     },
-
     "cpu": {
         "format": "",
         "tooltip-format": "CPU: {usage}%",
         "interval": 2
     },
-
     "memory": {
         "format": "",
         "tooltip-format": "RAM: {used:0.1f}G / {total:0.1f}G ({percentage}%)"
     },
-
     "backlight": {
         "format": "{icon}",
-        "format-icons": ["󰃞", "󰃟", "󰃠"],
+        "format-icons": [
+            "󰃞",
+            "󰃟",
+            "󰃠"
+        ],
         "tooltip-format": "Brightness: {percent}%",
         "on-scroll-up": "brightnessctl set +5%",
         "on-scroll-down": "brightnessctl set 5%-",
         "on-click": "brightnessctl set 50%",
         "on-click-right": "brightnessctl set 100%"
     },
-
     "pulseaudio": {
         "format": "{icon}",
         "format-muted": "󰝟",
         "format-icons": {
-            "default": ["󰕿", "󰖀", "󰕾"]
+            "default": [
+                "󰕿",
+                "󰖀",
+                "󰕾"
+            ]
         },
         "tooltip-format": "Volume: {volume}%",
         "on-click": "~/.config/waybar/scripts/volume-popup.sh",
@@ -59,7 +73,6 @@
         "on-scroll-up": "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%+",
         "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
     },
-
     "mpris": {
         "format": "{status_icon}",
         "format-paused": "󰏤",
@@ -78,7 +91,6 @@
         "on-scroll-up": "playerctl volume 0.05+",
         "on-scroll-down": "playerctl volume 0.05-"
     },
-
     "network": {
         "format-wifi": "󰖩",
         "format-ethernet": "󰈁",
@@ -86,16 +98,26 @@
         "tooltip-format-wifi": "{essid} ({signalStrength}%)\nIP: {ipaddr}",
         "tooltip-format-ethernet": "{ifname}\nIP: {ipaddr}",
         "tooltip-format-disconnected": "Disconnected",
-        "on-click": "nm-connection-editor",
+        "on-click": "alacritty -e nmtui",
         "on-click-right": "nmcli radio wifi toggle"
     },
-
     "battery": {
         "format": "{icon}\n{capacity}",
         "format-charging": "󱐋\n{capacity}",
         "format-plugged": "󰚥\n{capacity}",
         "format-full": "󰁹",
-        "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰁹"],
+        "format-icons": [
+            "󰂎",
+            "󰁺",
+            "󰁻",
+            "󰁼",
+            "󰁽",
+            "󰁾",
+            "󰁿",
+            "󰂀",
+            "󰂁",
+            "󰁹"
+        ],
         "tooltip-format": "Battery: {capacity}%\n{time}",
         "states": {
             "full": 100,
@@ -104,7 +126,6 @@
             "critical": 15
         }
     },
-
     "tray": {
         "icon-size": 14,
         "spacing": 4
