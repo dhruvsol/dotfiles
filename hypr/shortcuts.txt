@@ -1,0 +1,61 @@
+# ═══════════════════════════════════════════════════════════════
+# 🌸 Sakura Night - Keyboard Shortcuts
+# ═══════════════════════════════════════════════════════════════
+
+# ── General ─────────────────────────────────────────────────────
+Super + Q           Launch terminal (Alacritty)
+Super + R           App launcher (Rofi)
+Super + C           Close active window
+Super + M           Exit Hyprland
+Super + V           Toggle floating mode
+Super + P           Pseudo tiling (dwindle)
+Super + J           Toggle split direction
+
+# ── Applications ────────────────────────────────────────────────
+Super + B           Open browser (Firefox)
+Super + E           Open file manager
+Super + W           Reload wallpaper
+Super + /           Show this shortcuts menu
+
+# ── Workspaces ──────────────────────────────────────────────────
+Super + 1-9         Switch to workspace 1-9
+Super + 0           Switch to workspace 10
+Super + Shift + 1-9 Move window to workspace 1-9
+Super + S           Toggle scratchpad
+Super + Shift + S   Move to scratchpad
+Super + Scroll      Scroll through workspaces
+
+# ── Window Navigation ───────────────────────────────────────────
+Super + Alt + H     Focus up
+Super + Alt + J     Focus left
+Super + Alt + K     Focus right
+Super + Alt + L     Focus down
+
+# ── Window Management ───────────────────────────────────────────
+Super + Mouse L     Move window (drag)
+Super + Mouse R     Resize window (drag)
+
+# ── Waybar ──────────────────────────────────────────────────────
+Super + Shift + B   Toggle waybar
+
+# ── Media Keys ──────────────────────────────────────────────────
+Volume Up           Increase volume 5%
+Volume Down         Decrease volume 5%
+Volume Mute         Toggle mute
+Brightness Up       Increase brightness 5%
+Brightness Down     Decrease brightness 5%
+Play/Pause          Toggle media playback
+Next                Next track
+Previous            Previous track
+
+# ── Tmux (inside terminal) ──────────────────────────────────────
+Alt + A             Tmux prefix
+Prefix + |          Split vertical
+Prefix + -          Split horizontal
+Prefix + h/j/k/l    Navigate panes
+Prefix + H/J/K/L    Resize panes
+Prefix + c          New window
+Prefix + n/p        Next/previous window
+Prefix + r          Reload config
+Prefix + d          Detach session
+
