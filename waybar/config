@@ -1,101 +1,104 @@
 {
-  "layer": "top",
-  "position": "right",
-  "width": 44,
-  "spacing": 4,
-  "margin-top": 8,
-  "margin-bottom": 8,
-  "margin-right": 8,
-  "modules-left": [
-    "hyprland/workspaces"
-  ],
-  "modules-center": [
-    "clock"
-  ],
-  "modules-right": [
-    "cpu",
-    "memory",
-    "pulseaudio",
-    "network",
-    "battery",
-    "tray"
-  ],
-  "hyprland/workspaces": {
-    "format": "{icon}",
-    "format-icons": {
-      "1": "",
-      "2": "",
-      "3": "",
-      "4": "",
-      "5": "",
-      "urgent": "",
-      "active": "",
-      "default": ""
-    },
-    "on-click": "activate",
-    "persistent-workspaces": {
-      "*": 4
-    }
-  },
-  "clock": {
-    "format": "{:%H\n%M}",
-    "format-alt": "{:%d\n%m}",
-    "tooltip-format": "{:%A, %B %d, %Y}"
-  },
-  "cpu": {
-    "format": "",
-    "tooltip-format": "CPU: {usage}%",
-    "interval": 2
-  },
-  "memory": {
-    "format": "",
-    "tooltip-format": "RAM: {percentage}%\n{used:0.1f}G / {total:0.1f}G"
-  },
-  "pulseaudio": {
-    "format": "{icon}",
-    "format-muted": "󰝟",
-    "format-icons": {
-      "default": [
-        "󰕿",
-        "󰖀",
-        "󰕾"
-      ]
-    },
-    "tooltip-format": "Volume: {volume}%",
-    "on-click": "pavucontrol"
-  },
-  "network": {
-    "format-wifi": "󰖩",
-    "format-ethernet": "󰈁",
-    "format-disconnected": "󰖪",
-    "tooltip-format-wifi": "{essid} ({signalStrength}%)",
-    "tooltip-format-disconnected": "Disconnected",
-    "on-click": "nm-connection-editor"
-  },
-  "battery": {
-    "format": "{icon}",
-    "format-charging": "󱐋",
-    "format-plugged": "󰚥",
-    "format-icons": [
-      "󰁺",
-      "󰁻",
-      "󰁼",
-      "󰁽",
-      "󰁾",
-      "󰁿",
-      "󰂀",
-      "󰂁",
-      "󰂂",
-      "󰁹"
+    "layer": "top",
+    "position": "right",
+    "width": 48,
+    "spacing": 4,
+    "margin-top": 8,
+    "margin-bottom": 8,
+    "margin-right": 8,
+
+    "modules-left": [
+        "hyprland/workspaces"
     ],
-    "tooltip-format": "{capacity}% - {time}",
-    "states": {
-      "warning": 30,
-      "critical": 15
+
+    "modules-center": [
+        "clock"
+    ],
+
+    "modules-right": [
+        "cpu",
+        "memory",
+        "backlight",
+        "pulseaudio#icon",
+        "pulseaudio#slider",
+        "network",
+        "battery",
+        "tray"
+    ],
+
+    "hyprland/workspaces": {
+        "format": "{name}",
+        "on-click": "activate",
+        "persistent-workspaces": {
+            "*": 4
+        }
+    },
+
+    "clock": {
+        "format": "{:%H\n%M}",
+        "format-alt": "{:%d\n%m}",
+        "tooltip-format": "{:%A, %B %d, %Y}"
+    },
+
+    "cpu": {
+        "format": "C\n{usage}",
+        "tooltip-format": "CPU: {usage}%",
+        "interval": 2
+    },
+
+    "memory": {
+        "format": "M\n{percentage}",
+        "tooltip-format": "RAM: {used:0.1f}G / {total:0.1f}G"
+    },
+
+    "backlight": {
+        "format": "B\n{percent}",
+        "tooltip-format": "Brightness: {percent}%",
+        "on-scroll-up": "brightnessctl set +5%",
+        "on-scroll-down": "brightnessctl set 5%-"
+    },
+
+    "pulseaudio#icon": {
+        "format": "{icon}",
+        "format-muted": "M",
+        "format-icons": {
+            "default": ["L", "M", "H"]
+        },
+        "tooltip-format": "Volume: {volume}%",
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "on-click-right": "pavucontrol"
+    },
+
+    "pulseaudio#slider": {
+        "format": "{volume}",
+        "tooltip-format": "Volume: {volume}%",
+        "on-scroll-up": "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%+",
+        "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-",
+        "on-click": "pavucontrol"
+    },
+
+    "network": {
+        "format-wifi": "W\n{signalStrength}",
+        "format-ethernet": "E",
+        "format-disconnected": "X",
+        "tooltip-format-wifi": "WiFi: {essid}\nSignal: {signalStrength}%\nIP: {ipaddr}",
+        "tooltip-format-disconnected": "Disconnected",
+        "on-click": "nm-connection-editor"
+    },
+
+    "battery": {
+        "format": "B\n{capacity}",
+        "format-charging": "C\n{capacity}",
+        "format-plugged": "P\n{capacity}",
+        "tooltip-format": "Battery: {capacity}%\nTime: {time}",
+        "states": {
+            "warning": 30,
+            "critical": 15
+        }
+    },
+
+    "tray": {
+        "icon-size": 16,
+        "spacing": 6
     }
-  },
-  "tray": {
-    "icon-size": 16,
-    "spacing": 6
-  }
 }

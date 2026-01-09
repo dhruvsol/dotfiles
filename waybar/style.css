@@ -1,44 +1,47 @@
 /* Sakura Night - Vertical Waybar */
 
 * {
-  font-family: 'JetBrainsMono Nerd Font', 'Font Awesome 6 Free', sans-serif;
-  font-size: 14px;
+  font-family: 'JetBrainsMono Nerd Font', monospace;
+  font-size: 11px;
   border: none;
   border-radius: 0;
   min-height: 0;
 }
 
 window#waybar {
-  background: rgba(26, 27, 38, 0.9);
+  background: rgba(26, 27, 38, 0.92);
   border-radius: 14px;
-  border: 2px solid rgba(187, 154, 247, 0.4);
+  border: 2px solid rgba(187, 154, 247, 0.5);
   color: #c0caf5;
 }
 
-window#waybar.hidden {
-  opacity: 0.2;
-}
-
-/* For vertical bar - stack items */
+/* All modules base */
 #workspaces,
 #clock,
 #cpu,
 #memory,
+#backlight,
 #pulseaudio,
 #network,
 #battery,
 #tray {
-  padding: 8px 4px;
+  padding: 6px 4px;
   margin: 2px 4px;
+  border-radius: 8px;
+  font-weight: bold;
 }
 
-/* Workspaces */
+/* Workspaces - numbers 1-4 */
 #workspaces button {
   color: #565f89;
-  padding: 4px;
+  padding: 6px 4px;
   margin: 2px 0;
   border-radius: 8px;
   background: transparent;
+  font-size: 12px;
+  font-weight: bold;
+  min-width: 24px;
+  min-height: 24px;
 }
 
 #workspaces button.active {
@@ -53,33 +56,56 @@ window#waybar.hidden {
 
 #workspaces button:hover {
   color: #bb9af7;
-  background: rgba(187, 154, 247, 0.2);
+  background: rgba(187, 154, 247, 0.25);
 }
 
 /* Clock */
 #clock {
   color: #bb9af7;
+  font-size: 14px;
   font-weight: bold;
-  font-size: 15px;
+  padding: 10px 4px;
 }
 
-/* System modules */
+/* CPU */
 #cpu {
   color: #7dcfff;
 }
 
+/* Memory */
 #memory {
   color: #7aa2f7;
 }
 
-#pulseaudio {
-  color: #ff9e64;
+/* Backlight */
+#backlight {
+  color: #e0af68;
 }
 
-#pulseaudio.muted {
+/* Volume icon */
+#pulseaudio.icon {
+  color: #ff9e64;
+  font-size: 12px;
+}
+
+#pulseaudio.icon.muted {
   color: #565f89;
 }
 
+/* Volume slider/number */
+#pulseaudio.slider {
+  color: #ff9e64;
+  font-size: 10px;
+  padding: 4px;
+  background: rgba(255, 158, 100, 0.15);
+  border-radius: 6px;
+}
+
+#pulseaudio.slider:hover {
+  background: rgba(255, 158, 100, 0.3);
+}
+
+/* Network */
 #network {
   color: #9ece6a;
 }
@@ -88,6 +114,7 @@ window#waybar.hidden {
   color: #f7768e;
 }
 
+/* Battery */
 #battery {
   color: #9ece6a;
 }
@@ -103,15 +130,16 @@ window#waybar.hidden {
 
 #battery.charging {
   color: #9ece6a;
+  background: rgba(158, 206, 106, 0.15);
 }
 
 @keyframes blink {
-  to {
-    color: #f7768e;
-    background: rgba(247, 118, 142, 0.2);
+  50% {
+    background: rgba(247, 118, 142, 0.3);
   }
 }
 
+/* Tray */
 #tray {
   padding: 4px;
 }
@@ -125,6 +153,7 @@ window#waybar.hidden {
   border-radius: 6px;
 }
 
+/* Tooltip */
 tooltip {
   background: #15141b;
   border: 1px solid #bb9af7;
