@@ -101,20 +101,35 @@ window#waybar {
 /* Battery */
 #battery {
   color: #9ece6a;
-  font-size: 11px;
+  font-size: 10px;
+}
+
+#battery.full {
+  color: #9ece6a;
+}
+
+#battery.good {
+  color: #7dcfff;
 }
 
 #battery.warning {
   color: #e0af68;
+  background: rgba(224, 175, 104, 0.1);
 }
 
 #battery.critical {
   color: #f7768e;
+  background: rgba(247, 118, 142, 0.2);
   animation: blink 1s infinite;
 }
 
 #battery.charging {
   color: #bb9af7;
+  background: rgba(187, 154, 247, 0.1);
+}
+
+#battery.plugged {
+  color: #9ece6a;
 }
 
 @keyframes blink {
