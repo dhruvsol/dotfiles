@@ -20,14 +20,16 @@ window#waybar {
 #clock,
 #cpu,
 #memory,
+#backlight,
 #pulseaudio,
+#mpris,
 #network,
 #battery,
 #tray {
   padding: 4px 2px;
   margin: 1px 2px;
-  border-radius: 4px;
-  /* text-align: center; */
+  border-radius: 6px;
+  text-align: center;
 }
 
 /* Workspaces */
@@ -79,6 +81,12 @@ window#waybar {
   font-size: 11px;
 }
 
+/* Backlight/Brightness */
+#backlight {
+  color: #e0af68;
+  font-size: 11px;
+}
+
 /* Volume */
 #pulseaudio {
   color: #ff9e64;
@@ -86,6 +94,24 @@ window#waybar {
 }
 
 #pulseaudio.muted {
+  color: #565f89;
+}
+
+/* Media Player */
+#mpris {
+  color: #bb9af7;
+  font-size: 12px;
+}
+
+#mpris.playing {
+  color: #9ece6a;
+}
+
+#mpris.paused {
+  color: #e0af68;
+}
+
+#mpris.stopped {
   color: #565f89;
 }
 

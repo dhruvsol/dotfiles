@@ -9,7 +9,7 @@
 
     "modules-left": ["hyprland/workspaces"],
     "modules-center": ["clock"],
-    "modules-right": ["cpu", "memory", "pulseaudio", "network", "battery", "tray"],
+    "modules-right": ["cpu", "memory", "backlight", "pulseaudio", "mpris", "network", "battery", "tray"],
 
     "hyprland/workspaces": {
         "format": "{name}",
@@ -36,6 +36,16 @@
         "tooltip-format": "RAM: {used:0.1f}G / {total:0.1f}G ({percentage}%)"
     },
 
+    "backlight": {
+        "format": "{icon}",
+        "format-icons": ["󰃞", "󰃟", "󰃠"],
+        "tooltip-format": "Brightness: {percent}%",
+        "on-scroll-up": "brightnessctl set +5%",
+        "on-scroll-down": "brightnessctl set 5%-",
+        "on-click": "brightnessctl set 50%",
+        "on-click-right": "brightnessctl set 100%"
+    },
+
     "pulseaudio": {
         "format": "{icon}",
         "format-muted": "󰝟",
@@ -44,10 +54,29 @@
         },
         "tooltip-format": "Volume: {volume}%",
         "on-click": "~/.config/waybar/scripts/volume-popup.sh",
-        "on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+        "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
         "on-click-middle": "pavucontrol",
-        "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +5%",
-        "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5%"
+        "on-scroll-up": "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%+",
+        "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+    },
+
+    "mpris": {
+        "format": "{status_icon}",
+        "format-paused": "󰏤",
+        "format-stopped": "󰓛",
+        "format-playing": "󰐊",
+        "status-icons": {
+            "playing": "󰐊",
+            "paused": "󰏤",
+            "stopped": "󰓛"
+        },
+        "tooltip-format": "{artist} - {title}",
+        "tooltip-format-disconnected": "No player",
+        "on-click": "playerctl play-pause",
+        "on-click-right": "playerctl next",
+        "on-click-middle": "playerctl previous",
+        "on-scroll-up": "playerctl volume 0.05+",
+        "on-scroll-down": "playerctl volume 0.05-"
     },
 
     "network": {
@@ -55,8 +84,10 @@
         "format-ethernet": "󰈁",
         "format-disconnected": "󰖪",
         "tooltip-format-wifi": "{essid} ({signalStrength}%)\nIP: {ipaddr}",
+        "tooltip-format-ethernet": "{ifname}\nIP: {ipaddr}",
         "tooltip-format-disconnected": "Disconnected",
-        "on-click": "nm-connection-editor"
+        "on-click": "nm-connection-editor",
+        "on-click-right": "nmcli radio wifi toggle"
     },
 
     "battery": {

@@ -12,62 +12,60 @@
     font: "JetBrainsMono Nerd Font 10";
     background-color: transparent;
     text-color: @fg;
-    padding: 0;
-    margin: 0;
 }
 
 window {
-    width: 400px;
+    width: 380px;
+    height: 320px;
     location: center;
     anchor: center;
     border: 1px solid;
     border-color: @accent;
     border-radius: 6px;
     background-color: @bg;
+    padding: 0;
+    margin: 0;
 }
 
 mainbox {
     children: [ inputbar, listview ];
     spacing: 0;
     padding: 0;
+    background-color: @bg;
 }
 
 inputbar {
     children: [ prompt, entry ];
-    padding: 10px 12px;
+    padding: 8px 10px;
     background-color: @bg-alt;
-    border-radius: 6px 6px 0 0;
+    margin: 0;
 }
 
 prompt {
-    padding: 0 8px 0 0;
+    padding: 0 6px 0 0;
     text-color: @accent;
-    font: "JetBrainsMono Nerd Font Bold 10";
 }
 
 entry {
     placeholder: "Search...";
     placeholder-color: @fg-dim;
     text-color: @fg;
-    cursor: text;
 }
 
 listview {
-    lines: 6;
+    lines: 5;
     columns: 1;
     fixed-height: true;
-    padding: 6px;
-    spacing: 4px;
+    padding: 4px;
+    spacing: 2px;
     scrollbar: false;
     background-color: @bg;
-    border-radius: 0 0 6px 6px;
 }
 
 element {
-    padding: 8px 10px;
-    spacing: 8px;
-    border-radius: 4px;
-    cursor: pointer;
+    padding: 6px 8px;
+    spacing: 6px;
+    border-radius: 6px;
 }
 
 element normal.normal {
@@ -81,11 +79,9 @@ element selected.normal {
 }
 
 element-icon {
-    size: 20px;
-    cursor: inherit;
+    size: 18px;
 }
 
 element-text {
-    cursor: inherit;
     vertical-align: 0.5;
 }
