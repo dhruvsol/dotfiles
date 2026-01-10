@@ -1,5 +1,5 @@
 -- ═══════════════════════════════════════════════════════════════
--- 🌸 Sakura Night - LSP Configuration
+-- 🌸 Sakura Night - LSP Configuration (Neovim 0.11+)
 -- ═══════════════════════════════════════════════════════════════
 
 return {
@@ -23,7 +23,12 @@ return {
     -- ── Mason LSPConfig bridge ───────────────────────────────────
     {
         "williamboman/mason-lspconfig.nvim",
-        dependencies = { "williamboman/mason.nvim" },
+        dependencies = {
+            "williamboman/mason.nvim",
+            "neovim/nvim-lspconfig",
+            "hrsh7th/cmp-nvim-lsp",
+            "b0o/schemastore.nvim",
+        },
         config = function()
             require("mason-lspconfig").setup({
                 ensure_installed = {
@@ -36,61 +41,17 @@ return {
                     "taplo",
                     "jsonls",
                     "lua_ls",
-                    -- Note: rust_analyzer is handled by rustaceanvim
                 },
                 automatic_installation = true,
             })
-        end,
-    },
 
-    -- ── LSP Config ───────────────────────────────────────────────
-    {
-        "neovim/nvim-lspconfig",
-        dependencies = {
-            "williamboman/mason.nvim",
-            "williamboman/mason-lspconfig.nvim",
-            "hrsh7th/cmp-nvim-lsp",
-            "b0o/schemastore.nvim",
-        },
-        config = function()
-            local lspconfig = require("lspconfig")
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-            -- Keymaps (applied when LSP attaches)
-            local on_attach = function(_, bufnr)
-                local map = function(keys, func, desc)
-                    vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
-                end
+            -- ── Configure servers using vim.lsp.config (Neovim 0.11+) ──
 
-                map("gd", vim.lsp.buf.definition, "Go to definition")
-                map("gD", vim.lsp.buf.declaration, "Go to declaration")
-                map("gr", vim.lsp.buf.references, "Go to references")
-                map("gi", vim.lsp.buf.implementation, "Go to implementation")
-                map("K", vim.lsp.buf.hover, "Hover documentation")
-                map("<leader>rn", vim.lsp.buf.rename, "Rename symbol")
-                map("<leader>ca", vim.lsp.buf.code_action, "Code action")
-                map("<leader>D", vim.lsp.buf.type_definition, "Type definition")
-                map("<leader>ds", vim.lsp.buf.document_symbol, "Document symbols")
-                map("[d", vim.diagnostic.goto_prev, "Previous diagnostic")
-                map("]d", vim.diagnostic.goto_next, "Next diagnostic")
-                map("<leader>d", vim.diagnostic.open_float, "Show diagnostic")
-            end
-
-            -- Diagnostic signs
-            local signs = { Error = " ", Warn = " ", Hint = "󰌵 ", Info = " " }
-            for type, icon in pairs(signs) do
-                local hl = "DiagnosticSign" .. type
-                vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-            end
-
-            -- Common setup options
-            local default_opts = {
+            -- TypeScript / JavaScript / React
+            vim.lsp.config("ts_ls", {
                 capabilities = capabilities,
-                on_attach = on_attach,
-            }
-
-            -- ── TypeScript / JavaScript / React ──────────────────
-            lspconfig.ts_ls.setup(vim.tbl_extend("force", default_opts, {
                 settings = {
                     typescript = {
                         inlayHints = {
@@ -99,43 +60,56 @@ return {
                         },
                     },
                 },
-            }))
+            })
 
-            -- ── HTML ─────────────────────────────────────────────
-            lspconfig.html.setup(default_opts)
+            -- HTML
+            vim.lsp.config("html", {
+                capabilities = capabilities,
+            })
 
-            -- ── CSS ──────────────────────────────────────────────
-            lspconfig.cssls.setup(default_opts)
+            -- CSS
+            vim.lsp.config("cssls", {
+                capabilities = capabilities,
+            })
 
-            -- ── Tailwind CSS ─────────────────────────────────────
-            lspconfig.tailwindcss.setup(default_opts)
+            -- Tailwind CSS
+            vim.lsp.config("tailwindcss", {
+                capabilities = capabilities,
+            })
 
-            -- ── Emmet (HTML/CSS snippets) ────────────────────────
-            lspconfig.emmet_ls.setup(vim.tbl_extend("force", default_opts, {
+            -- Emmet (HTML/CSS snippets)
+            vim.lsp.config("emmet_ls", {
+                capabilities = capabilities,
                 filetypes = {
                     "html", "css", "scss", "javascript", "javascriptreact",
                     "typescript", "typescriptreact", "vue", "svelte",
                 },
-            }))
+            })
 
-            -- ── Markdown ─────────────────────────────────────────
-            lspconfig.marksman.setup(default_opts)
+            -- Markdown
+            vim.lsp.config("marksman", {
+                capabilities = capabilities,
+            })
 
-            -- ── TOML ─────────────────────────────────────────────
-            lspconfig.taplo.setup(default_opts)
+            -- TOML
+            vim.lsp.config("taplo", {
+                capabilities = capabilities,
+            })
 
-            -- ── JSON ─────────────────────────────────────────────
-            lspconfig.jsonls.setup(vim.tbl_extend("force", default_opts, {
+            -- JSON
+            vim.lsp.config("jsonls", {
+                capabilities = capabilities,
                 settings = {
                     json = {
                         schemas = require("schemastore").schemas(),
                         validate = { enable = true },
                     },
                 },
-            }))
+            })
 
-            -- ── Lua (for Neovim config) ──────────────────────────
-            lspconfig.lua_ls.setup(vim.tbl_extend("force", default_opts, {
+            -- Lua (for Neovim config)
+            vim.lsp.config("lua_ls", {
+                capabilities = capabilities,
                 settings = {
                     Lua = {
                         diagnostics = { globals = { "vim" } },
@@ -143,7 +117,56 @@ return {
                         telemetry = { enable = false },
                     },
                 },
-            }))
+            })
+
+            -- ── Enable all servers ──
+            vim.lsp.enable({
+                "ts_ls",
+                "html",
+                "cssls",
+                "tailwindcss",
+                "emmet_ls",
+                "marksman",
+                "taplo",
+                "jsonls",
+                "lua_ls",
+            })
+        end,
+    },
+
+    -- ── LSP Keymaps (on attach) ──────────────────────────────────
+    {
+        "neovim/nvim-lspconfig",
+        config = function()
+            -- Keymaps applied when LSP attaches to buffer
+            vim.api.nvim_create_autocmd("LspAttach", {
+                callback = function(args)
+                    local bufnr = args.buf
+                    local map = function(keys, func, desc)
+                        vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
+                    end
+
+                    map("gd", vim.lsp.buf.definition, "Go to definition")
+                    map("gD", vim.lsp.buf.declaration, "Go to declaration")
+                    map("gr", vim.lsp.buf.references, "Go to references")
+                    map("gi", vim.lsp.buf.implementation, "Go to implementation")
+                    map("K", vim.lsp.buf.hover, "Hover documentation")
+                    map("<leader>rn", vim.lsp.buf.rename, "Rename symbol")
+                    map("<leader>ca", vim.lsp.buf.code_action, "Code action")
+                    map("<leader>D", vim.lsp.buf.type_definition, "Type definition")
+                    map("<leader>ds", vim.lsp.buf.document_symbol, "Document symbols")
+                    map("[d", vim.diagnostic.goto_prev, "Previous diagnostic")
+                    map("]d", vim.diagnostic.goto_next, "Next diagnostic")
+                    map("<leader>d", vim.diagnostic.open_float, "Show diagnostic")
+                end,
+            })
+
+            -- Diagnostic signs
+            local signs = { Error = " ", Warn = " ", Hint = "󰌵 ", Info = " " }
+            for type, icon in pairs(signs) do
+                local hl = "DiagnosticSign" .. type
+                vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+            end
         end,
     },
 
