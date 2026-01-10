@@ -21,6 +21,15 @@ return {
         end,
     },
 
+    -- ── Icons ───────────────────────────────────────────────────
+    {
+        "nvim-tree/nvim-web-devicons",
+        lazy = false,
+        config = function()
+            require("nvim-web-devicons").setup()
+        end,
+    },
+
     -- ── Statusline ───────────────────────────────────────────────
     {
         "nvim-lualine/lualine.nvim",
