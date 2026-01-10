@@ -27,6 +27,7 @@ PACKAGES=(
     "fontconfig:$CONFIG_DIR/fontconfig"
     "code:$CONFIG_DIR/Code"
     "tmux:$CONFIG_DIR/tmux"
+    "nvim:$CONFIG_DIR/nvim"
 )
 
 print_status() { echo -e "  ${GREEN}✓${NC} $1"; }

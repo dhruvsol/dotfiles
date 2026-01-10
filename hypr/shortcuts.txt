@@ -48,6 +48,24 @@ Play/Pause          Toggle media playback
 Next                Next track
 Previous            Previous track
 
+# ── Neovim (mirrors Tmux with Space as leader) ─────────────────
+Space + E           Split vertical
+Space + W           Split horizontal
+Space + x           Close split
+Space + h/j/k/l     Navigate splits
+Space + H/J/K/L     Resize splits
+Space + c           New tab
+Space + t / T       Next / previous tab
+Space + 1-5         Switch to tab 1-5
+Space + s           Save file
+Space + q           Quit
+Space + e           Toggle file explorer
+Space + ff          Find files
+Space + fg          Live grep (search in files)
+Space + fb          List buffers
+gcc                 Comment line
+gc                  Comment selection (visual)
+
 # ── Tmux ──────────────────────────────────────
 Alt + E             Split vertical
 Alt + W             Split horizontal
