@@ -16,6 +16,7 @@ Super + B           Open browser (LibreWolf)
 Super + E           Open file manager
 Super + W           Reload wallpaper
 Super + /           Show this shortcuts menu
+Super + X           Power menu (shutdown/reboot/sleep)
 
 # ── Workspaces ──────────────────────────────────────────────────
 Super + 1-9         Switch to workspace 1-9
