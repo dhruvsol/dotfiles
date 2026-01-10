@@ -48,7 +48,11 @@ Play/Pause          Toggle media playback
 Next                Next track
 Previous            Previous track
 
-# ── Neovim (mirrors Tmux with Space as leader) ─────────────────
+# ── Neovim ─────────────────────────────────────────────────────
+jk                  Exit insert mode
+Space + s           Save file
+Space + q           Quit
+Space + Q           Quit all (force)
 Space + E           Split vertical
 Space + W           Split horizontal
 Space + x           Close split
@@ -58,14 +62,22 @@ Space + c           New tab
 Space + t / T       Next / previous tab
 Space + 1-5         Switch to tab 1-5
 Space + ,           Rename tab
-Space + s           Save file
-Space + q           Quit
 Space + e           Toggle file explorer
 Space + ff          Find files
 Space + fg          Live grep (search in files)
 Space + fb          List buffers
+Space + fr          Recent files
 gcc                 Comment line
 gc                  Comment selection (visual)
+gd                  Go to definition
+gr                  Go to references
+K                   Hover documentation
+Space + rn          Rename symbol
+Space + ca          Code action
+Space + d           Show diagnostic
+[d / ]d             Prev / next diagnostic
+Tab / Shift+Tab     Completion navigation
+Ctrl + Space        Trigger completion
 
 # ── Tmux ──────────────────────────────────────
 Alt + E             Split vertical

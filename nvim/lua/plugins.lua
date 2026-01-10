@@ -1,0 +1,132 @@
+-- ═══════════════════════════════════════════════════════════════
+-- 🌸 Sakura Night - Plugins
+-- ═══════════════════════════════════════════════════════════════
+
+return {
+    -- ── Colorscheme ──────────────────────────────────────────────
+    {
+        "folke/tokyonight.nvim",
+        lazy = false,
+        priority = 1000,
+        config = function()
+            require("tokyonight").setup({
+                style = "night",
+                transparent = true,
+                styles = {
+                    sidebars = "transparent",
+                    floats = "transparent",
+                },
+            })
+            vim.cmd.colorscheme("tokyonight-night")
+        end,
+    },
+
+    -- ── Statusline ───────────────────────────────────────────────
+    {
+        "nvim-lualine/lualine.nvim",
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+        config = function()
+            require("lualine").setup({
+                options = {
+                    theme = "tokyonight",
+                    component_separators = { left = "", right = "" },
+                    section_separators = { left = "", right = "" },
+                },
+            })
+        end,
+    },
+
+    -- ── Syntax highlighting ──────────────────────────────────────
+    {
+        "nvim-treesitter/nvim-treesitter",
+        build = ":TSUpdate",
+        config = function()
+            require("nvim-treesitter.configs").setup({
+                ensure_installed = {
+                    "lua", "vim", "vimdoc", "bash",
+                    "python", "javascript", "typescript",
+                    "json", "yaml", "markdown",
+                },
+                auto_install = true,
+                highlight = { enable = true },
+                indent = { enable = true },
+            })
+        end,
+    },
+
+    -- ── Fuzzy finder ─────────────────────────────────────────────
+    {
+        "nvim-telescope/telescope.nvim",
+        branch = "0.1.x",
+        dependencies = { "nvim-lua/plenary.nvim" },
+        keys = {
+            { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find files" },
+            { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Live grep" },
+            { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
+            { "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Help tags" },
+            { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent files" },
+        },
+    },
+
+    -- ── File explorer ────────────────────────────────────────────
+    {
+        "nvim-tree/nvim-tree.lua",
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+        keys = {
+            { "<leader>e", "<cmd>NvimTreeToggle<cr>", desc = "Toggle file explorer" },
+        },
+        config = function()
+            require("nvim-tree").setup({
+                view = { width = 30 },
+                renderer = { icons = { show = { folder_arrow = false } } },
+            })
+        end,
+    },
+
+    -- ── Git signs ────────────────────────────────────────────────
+    {
+        "lewis6991/gitsigns.nvim",
+        config = function()
+            require("gitsigns").setup()
+        end,
+    },
+
+    -- ── Auto pairs ───────────────────────────────────────────────
+    {
+        "windwp/nvim-autopairs",
+        event = "InsertEnter",
+        config = true,
+    },
+
+    -- ── Comments ─────────────────────────────────────────────────
+    {
+        "numToStr/Comment.nvim",
+        keys = {
+            { "gcc", mode = "n", desc = "Comment line" },
+            { "gc", mode = "v", desc = "Comment selection" },
+        },
+        config = true,
+    },
+
+    -- ── Which key ────────────────────────────────────────────────
+    {
+        "folke/which-key.nvim",
+        event = "VeryLazy",
+        config = function()
+            require("which-key").setup()
+        end,
+    },
+
+    -- ── Indent guides ────────────────────────────────────────────
+    {
+        "lukas-reineke/indent-blankline.nvim",
+        main = "ibl",
+        config = function()
+            require("ibl").setup({
+                indent = { char = "│" },
+                scope = { enabled = false },
+            })
+        end,
+    },
+}
+
