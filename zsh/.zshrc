@@ -106,6 +106,7 @@ alias tn='tmux new -s'
 export EDITOR='nvim'
 export VISUAL='nvim'
 export PAGER='less'
+export BROWSER='librewolf'
 
 # Path
 export PATH="$HOME/.local/bin:$PATH"

@@ -117,10 +117,8 @@ section "Installing icons"
 install_packages \
     papirus-icon-theme
 
-# ── Browser ─────────────────────────────────────────────────────
-section "Installing browser"
-install_packages \
-    firefox
+# ── Browser (installed via AUR later) ───────────────────────────
+# LibreWolf is installed in the AUR section below
 
 # ── Communication ───────────────────────────────────────────────
 section "Installing communication apps"
@@ -160,6 +158,7 @@ fi
 # ── AUR Packages ────────────────────────────────────────────────
 section "Installing AUR packages"
 install_aur \
+    librewolf-bin \
     slack-desktop \
     chatgpt-desktop-bin
 
@@ -196,8 +195,9 @@ echo -e "${MAGENTA}║${NC}  ${GREEN}✓ Installation Complete!${NC}            
 echo -e "${MAGENTA}╚════════════════════════════════════════╝${NC}"
 
 echo -e "\n${CYAN}Next steps:${NC}"
-echo -e "  1. Log out and select Hyprland at login"
-echo -e "  2. Press ${BLUE}Super + Q${NC} for terminal"
-echo -e "  3. Press ${BLUE}Super + R${NC} for app launcher"
-echo -e "  4. Press ${BLUE}Super + /${NC} for shortcuts menu"
+echo -e "  1. Run ${BLUE}./scripts/librewolf-setup.sh${NC} to configure LibreWolf theme"
+echo -e "  2. Log out and select Hyprland at login"
+echo -e "  3. Press ${BLUE}Super + Q${NC} for terminal"
+echo -e "  4. Press ${BLUE}Super + R${NC} for app launcher"
+echo -e "  5. Press ${BLUE}Super + /${NC} for shortcuts menu"
 echo -e ""

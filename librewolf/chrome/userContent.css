@@ -1,0 +1,97 @@
+/* ═══════════════════════════════════════════════════════════════
+   🌸 Sakura Night - LibreWolf Content Theme
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Color Variables ─────────────────────────────────────────── */
+:root {
+    --sakura-bg: #1a1b26;
+    --sakura-bg-alt: #15141b;
+    --sakura-fg: #c0caf5;
+    --sakura-fg-dim: #565f89;
+    --sakura-accent: #bb9af7;
+    --sakura-pink: #f7768e;
+    --sakura-cyan: #7dcfff;
+    --sakura-border: #292e42;
+}
+
+/* ── New Tab Page ────────────────────────────────────────────── */
+@-moz-document url("about:newtab"), url("about:home") {
+    body {
+        background-color: var(--sakura-bg) !important;
+    }
+    
+    .search-wrapper input {
+        background-color: var(--sakura-bg-alt) !important;
+        border: 1px solid var(--sakura-border) !important;
+        border-radius: 10px !important;
+        color: var(--sakura-fg) !important;
+    }
+    
+    .search-wrapper input:focus {
+        border-color: var(--sakura-accent) !important;
+        box-shadow: 0 0 0 2px rgba(187, 154, 247, 0.2) !important;
+    }
+    
+    .top-site-outer .title {
+        color: var(--sakura-fg) !important;
+    }
+    
+    .top-site-outer:hover {
+        background-color: var(--sakura-bg-alt) !important;
+        border-radius: 8px !important;
+    }
+}
+
+/* ── Preferences Page ────────────────────────────────────────── */
+@-moz-document url-prefix("about:preferences") {
+    :root {
+        --in-content-page-background: var(--sakura-bg) !important;
+        --in-content-box-background: var(--sakura-bg-alt) !important;
+        --in-content-text-color: var(--sakura-fg) !important;
+        --in-content-border-color: var(--sakura-border) !important;
+    }
+    
+    body {
+        background-color: var(--sakura-bg) !important;
+    }
+}
+
+/* ── Addons Page ─────────────────────────────────────────────── */
+@-moz-document url-prefix("about:addons") {
+    :root {
+        --in-content-page-background: var(--sakura-bg) !important;
+        --in-content-box-background: var(--sakura-bg-alt) !important;
+        --in-content-text-color: var(--sakura-fg) !important;
+    }
+}
+
+/* ── Error Pages ─────────────────────────────────────────────── */
+@-moz-document url-prefix("about:neterror"), url-prefix("about:certerror") {
+    body {
+        background-color: var(--sakura-bg) !important;
+        color: var(--sakura-fg) !important;
+    }
+    
+    .title {
+        color: var(--sakura-pink) !important;
+    }
+}
+
+/* ── Blank Page ──────────────────────────────────────────────── */
+@-moz-document url("about:blank") {
+    body {
+        background-color: var(--sakura-bg) !important;
+    }
+}
+
+/* ── PDF Viewer ──────────────────────────────────────────────── */
+@-moz-document url-prefix("about:reader") {
+    body {
+        background-color: var(--sakura-bg) !important;
+    }
+    
+    .container {
+        background-color: var(--sakura-bg-alt) !important;
+    }
+}
+

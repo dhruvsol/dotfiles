@@ -12,7 +12,7 @@ Super + P           Pseudo tiling (dwindle)
 Super + J           Toggle split direction
 
 # ── Applications ────────────────────────────────────────────────
-Super + B           Open browser (Firefox)
+Super + B           Open browser (LibreWolf)
 Super + E           Open file manager
 Super + W           Reload wallpaper
 Super + /           Show this shortcuts menu

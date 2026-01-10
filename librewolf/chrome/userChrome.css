@@ -1,0 +1,325 @@
+/* ═══════════════════════════════════════════════════════════════
+   🌸 Sakura Night - LibreWolf Theme
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Color Variables ─────────────────────────────────────────── */
+:root {
+  --sakura-bg: #1a1b26;
+  --sakura-bg-alt: #15141b;
+  --sakura-bg-dark: #13131a;
+  --sakura-fg: #c0caf5;
+  --sakura-fg-dim: #565f89;
+  --sakura-accent: #bb9af7;
+  --sakura-pink: #f7768e;
+  --sakura-cyan: #7dcfff;
+  --sakura-green: #9ece6a;
+  --sakura-yellow: #e0af68;
+  --sakura-border: #292e42;
+  --sakura-hover: #24283b;
+  --sakura-active: #414868;
+
+  /* Firefox/LibreWolf specific overrides */
+  --lwt-accent-color: var(--sakura-bg) !important;
+  --lwt-text-color: var(--sakura-fg) !important;
+  --toolbar-bgcolor: var(--sakura-bg) !important;
+  --toolbar-color: var(--sakura-fg) !important;
+  --urlbar-background-color: var(--sakura-bg-alt) !important;
+  --urlbar-separator-color: var(--sakura-border) !important;
+}
+
+/* ── Main Window ─────────────────────────────────────────────── */
+#main-window {
+  background-color: var(--sakura-bg) !important;
+}
+
+/* ── Tab Bar ─────────────────────────────────────────────────── */
+#TabsToolbar {
+  background-color: var(--sakura-bg-dark) !important;
+  border-bottom: 1px solid var(--sakura-border) !important;
+}
+
+/* Tab styling */
+.tabbrowser-tab {
+  background-color: transparent !important;
+  margin: 4px 2px !important;
+  border-radius: 8px !important;
+  transition: all 0.2s ease !important;
+}
+
+.tabbrowser-tab:hover {
+  background-color: var(--sakura-hover) !important;
+}
+
+.tabbrowser-tab[selected='true'] {
+  background-color: var(--sakura-bg) !important;
+  box-shadow: 0 0 8px rgba(187, 154, 247, 0.3) !important;
+}
+
+.tabbrowser-tab[selected='true'] .tab-background {
+  background: linear-gradient(
+    135deg,
+    var(--sakura-accent) 0%,
+    var(--sakura-pink) 100%
+  ) !important;
+  opacity: 0.1 !important;
+  border-radius: 8px !important;
+}
+
+/* Tab text */
+.tab-label {
+  color: var(--sakura-fg-dim) !important;
+  font-weight: 500 !important;
+}
+
+.tabbrowser-tab[selected='true'] .tab-label {
+  color: var(--sakura-fg) !important;
+  font-weight: 600 !important;
+}
+
+/* Tab close button */
+.tab-close-button {
+  opacity: 0 !important;
+  transition: opacity 0.2s ease !important;
+}
+
+.tabbrowser-tab:hover .tab-close-button {
+  opacity: 0.7 !important;
+}
+
+.tab-close-button:hover {
+  opacity: 1 !important;
+  fill: var(--sakura-pink) !important;
+}
+
+/* New tab button */
+#tabs-newtab-button {
+  fill: var(--sakura-accent) !important;
+  opacity: 0.8 !important;
+  transition: opacity 0.2s ease !important;
+}
+
+#tabs-newtab-button:hover {
+  opacity: 1 !important;
+}
+
+/* ── Navigation Bar ──────────────────────────────────────────── */
+#nav-bar {
+  background-color: var(--sakura-bg) !important;
+  border-bottom: 1px solid var(--sakura-border) !important;
+  padding: 4px 8px !important;
+}
+
+/* URL Bar */
+#urlbar {
+  background-color: var(--sakura-bg-alt) !important;
+  border: 1px solid var(--sakura-border) !important;
+  border-radius: 10px !important;
+  padding: 4px 8px !important;
+  transition: all 0.2s ease !important;
+}
+
+#urlbar:focus-within {
+  border-color: var(--sakura-accent) !important;
+  box-shadow: 0 0 0 2px rgba(187, 154, 247, 0.2) !important;
+}
+
+#urlbar-input {
+  color: var(--sakura-fg) !important;
+  font-family: 'JetBrains Mono', monospace !important;
+}
+
+/* URL bar placeholder */
+#urlbar-input::placeholder {
+  color: var(--sakura-fg-dim) !important;
+}
+
+/* Identity box (site info icon) */
+#identity-box {
+  padding: 0 8px !important;
+}
+
+#identity-icon {
+  fill: var(--sakura-accent) !important;
+}
+
+/* ── Toolbar Buttons ─────────────────────────────────────────── */
+toolbarbutton {
+  fill: var(--sakura-fg) !important;
+  opacity: 0.8 !important;
+  transition: all 0.2s ease !important;
+}
+
+toolbarbutton:hover {
+  background-color: var(--sakura-hover) !important;
+  opacity: 1 !important;
+  border-radius: 6px !important;
+}
+
+toolbarbutton[checked='true'],
+toolbarbutton[open='true'] {
+  background-color: var(--sakura-active) !important;
+  border-radius: 6px !important;
+}
+
+/* Back/Forward buttons */
+#back-button,
+#forward-button {
+  fill: var(--sakura-cyan) !important;
+}
+
+/* Reload button */
+#reload-button {
+  fill: var(--sakura-green) !important;
+}
+
+/* Stop button */
+#stop-button {
+  fill: var(--sakura-pink) !important;
+}
+
+/* ── Bookmarks Toolbar ───────────────────────────────────────── */
+#PersonalToolbar {
+  background-color: var(--sakura-bg) !important;
+  border-bottom: 1px solid var(--sakura-border) !important;
+  padding: 4px 8px !important;
+}
+
+.bookmark-item {
+  color: var(--sakura-fg) !important;
+  border-radius: 6px !important;
+  padding: 4px 8px !important;
+  transition: background-color 0.2s ease !important;
+}
+
+.bookmark-item:hover {
+  background-color: var(--sakura-hover) !important;
+}
+
+/* ── Sidebar ─────────────────────────────────────────────────── */
+#sidebar-box {
+  background-color: var(--sakura-bg-alt) !important;
+  border-right: 1px solid var(--sakura-border) !important;
+}
+
+#sidebar-header {
+  background-color: var(--sakura-bg) !important;
+  border-bottom: 1px solid var(--sakura-border) !important;
+}
+
+/* ── Findbar ─────────────────────────────────────────────────── */
+findbar {
+  background-color: var(--sakura-bg) !important;
+  border-top: 1px solid var(--sakura-border) !important;
+}
+
+.findbar-textbox {
+  background-color: var(--sakura-bg-alt) !important;
+  color: var(--sakura-fg) !important;
+  border: 1px solid var(--sakura-border) !important;
+  border-radius: 6px !important;
+}
+
+/* ── Context Menus ───────────────────────────────────────────── */
+menupopup {
+  background-color: var(--sakura-bg-alt) !important;
+  border: 1px solid var(--sakura-border) !important;
+  border-radius: 8px !important;
+  padding: 4px !important;
+}
+
+menuitem,
+menu {
+  color: var(--sakura-fg) !important;
+  border-radius: 4px !important;
+  padding: 6px 12px !important;
+}
+
+menuitem:hover,
+menu:hover {
+  background-color: var(--sakura-hover) !important;
+}
+
+menuitem[_moz-menuactive='true'],
+menu[_moz-menuactive='true'] {
+  background-color: var(--sakura-accent) !important;
+  color: var(--sakura-bg) !important;
+}
+
+menuseparator {
+  border-color: var(--sakura-border) !important;
+  margin: 4px 8px !important;
+}
+
+/* ── Scrollbars ──────────────────────────────────────────────── */
+scrollbar {
+  background-color: var(--sakura-bg-alt) !important;
+}
+
+scrollbar thumb {
+  background-color: var(--sakura-fg-dim) !important;
+  border-radius: 4px !important;
+}
+
+scrollbar thumb:hover {
+  background-color: var(--sakura-accent) !important;
+}
+
+/* ── Autocomplete Dropdown ───────────────────────────────────── */
+#urlbar-results {
+  background-color: var(--sakura-bg-alt) !important;
+  border: 1px solid var(--sakura-border) !important;
+  border-radius: 10px !important;
+}
+
+.urlbarView-row {
+  border-radius: 6px !important;
+  padding: 4px 8px !important;
+}
+
+.urlbarView-row:hover,
+.urlbarView-row[selected] {
+  background-color: var(--sakura-hover) !important;
+}
+
+.urlbarView-url {
+  color: var(--sakura-cyan) !important;
+}
+
+.urlbarView-title {
+  color: var(--sakura-fg) !important;
+}
+
+/* ── Hide Firefox branding elements ──────────────────────────── */
+#firefox-view-button,
+#fxa-toolbar-menu-button {
+  display: none !important;
+}
+
+/* ── Minimal mode tweaks ─────────────────────────────────────── */
+/* Hide titlebar spacers for more compact look */
+.titlebar-spacer {
+  display: none !important;
+}
+
+/* Reduce tab height */
+.tabbrowser-tab {
+  min-height: 32px !important;
+}
+
+/* ── Loading indicator ───────────────────────────────────────── */
+.tab-throbber {
+  fill: var(--sakura-accent) !important;
+}
+
+/* ── Audio playing indicator ─────────────────────────────────── */
+.tab-icon-sound {
+  fill: var(--sakura-cyan) !important;
+}
+
+/* ── Private browsing indicator ──────────────────────────────── */
+#private-browsing-indicator-with-label {
+  background-color: var(--sakura-accent) !important;
+  color: var(--sakura-bg) !important;
+  border-radius: 6px !important;
+  padding: 2px 8px !important;
+}
