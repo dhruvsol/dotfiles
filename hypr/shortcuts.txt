@@ -48,7 +48,7 @@ Play/Pause          Toggle media playback
 Next                Next track
 Previous            Previous track
 
-# ── Tmux (inside terminal) ──────────────────────────────────────
+# ── Tmux ──────────────────────────────────────
 Alt + E             Split vertical
 Alt + W             Split horizontal
 Alt + e             Cycle through panes
