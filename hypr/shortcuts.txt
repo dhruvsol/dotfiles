@@ -36,7 +36,7 @@ Super + Mouse L     Move window (drag)
 Super + Mouse R     Resize window (drag)
 
 # ── Waybar ──────────────────────────────────────────────────────
-Super + Shift + B   Toggle waybar
+Super + Shift + B   Toggle/reload waybar
 
 # ── Media Keys ──────────────────────────────────────────────────
 Volume Up           Increase volume 5%

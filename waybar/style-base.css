@@ -1,0 +1,191 @@
+/* Sakura Night - Minimal Vertical Waybar */
+
+* {
+  font-family: 'JetBrainsMono Nerd Font', 'Symbols Nerd Font', monospace;
+  font-size: 10px;
+  border: none;
+  border-radius: 0;
+    min-height: 0;
+  min-width: 0;
+}
+
+window#waybar {
+  background: rgba(26, 27, 38, 0.9);
+  border-radius: 6px;
+  border: 1px solid rgba(187, 154, 247, 0.4);
+  color: #c0caf5;
+}
+
+#workspaces,
+#clock,
+#cpu,
+#memory,
+#backlight,
+#pulseaudio,
+#mpris,
+#network,
+#battery,
+#tray {
+  padding: 4px 2px;
+  margin: 1px 2px;
+  border-radius: 6px;
+}
+
+/* Workspaces */
+#workspaces button {
+  color: #565f89;
+  padding: 4px 2px;
+  margin: 1px 0;
+  border-radius: 4px;
+  background: transparent;
+  font-size: 10px;
+  font-weight: bold;
+  min-width: 18px;
+  min-height: 18px;
+}
+
+#workspaces button.active {
+  color: #1a1b26;
+  background: #bb9af7;
+}
+
+#workspaces button.urgent {
+  color: #1a1b26;
+  background: #f7768e;
+}
+
+#workspaces button:hover {
+  color: #bb9af7;
+  background: rgba(187, 154, 247, 0.2);
+}
+
+/* Clock */
+#clock {
+  font-family: monospace;
+  color: #bb9af7;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 6px 2px;
+}
+
+/* CPU */
+#cpu {
+  color: #7dcfff;
+  font-size: 11px;
+}
+
+/* Memory */
+#memory {
+  color: #7aa2f7;
+  font-size: 11px;
+}
+
+/* Backlight/Brightness */
+#backlight {
+  color: #e0af68;
+  font-size: 11px;
+}
+
+/* Volume */
+#pulseaudio {
+  color: #ff9e64;
+  font-size: 11px;
+}
+
+#pulseaudio.muted {
+  color: #565f89;
+}
+
+/* Media Player */
+#mpris {
+  color: #bb9af7;
+  font-size: 12px;
+}
+
+#mpris.playing {
+  color: #9ece6a;
+}
+
+#mpris.paused {
+  color: #e0af68;
+}
+
+#mpris.stopped {
+  color: #565f89;
+}
+
+/* Network */
+#network {
+  color: #9ece6a;
+  font-size: 11px;
+}
+
+#network.disconnected {
+  color: #f7768e;
+}
+
+/* Battery */
+#battery {
+  color: #9ece6a;
+  font-size: 10px;
+}
+
+#battery.full {
+  color: #9ece6a;
+}
+
+#battery.good {
+  color: #7dcfff;
+}
+
+#battery.warning {
+  color: #e0af68;
+  background: rgba(224, 175, 104, 0.1);
+}
+
+#battery.critical {
+  color: #f7768e;
+  background: rgba(247, 118, 142, 0.2);
+  animation: blink 1s infinite;
+}
+
+#battery.charging {
+  color: #bb9af7;
+  background: rgba(187, 154, 247, 0.1);
+}
+
+#battery.plugged {
+  color: #9ece6a;
+}
+
+@keyframes blink {
+  50% {
+    background: rgba(247, 118, 142, 0.3);
+  }
+}
+
+/* Tray */
+#tray {
+  padding: 2px;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+  background: #f7768e;
+  border-radius: 4px;
+}
+
+/* Tooltip */
+tooltip {
+  background: #15141b;
+  border: 1px solid #bb9af7;
+  border-radius: 4px;
+}
+
+tooltip label {
+  color: #c0caf5;
+  padding: 4px;
+}
