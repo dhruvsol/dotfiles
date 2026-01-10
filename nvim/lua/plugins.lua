@@ -36,41 +36,51 @@ return {
         end,
     },
 
-    -- ── Syntax highlighting ──────────────────────────────────────
+    -- ── Syntax highlighting (nvim-treesitter rewrite for 0.11+) ──
     {
         "nvim-treesitter/nvim-treesitter",
+        lazy = false,
         build = ":TSUpdate",
         config = function()
-            require("nvim-treesitter.configs").setup({
-                ensure_installed = {
-                    -- Core
-                    "lua", "vim", "vimdoc", "bash", "regex",
-                    -- Rust
-                    "rust", "toml",
-                    -- Web / Frontend
-                    "javascript", "typescript", "tsx", "html", "css", "scss",
-                    -- Data
-                    "json", "jsonc", "yaml", "xml",
-                    -- Docs
-                    "markdown", "markdown_inline",
-                    -- Other
-                    "python", "go", "c", "cpp",
-                    -- Git
-                    "gitcommit", "gitignore", "diff",
-                },
-                auto_install = true,
-                highlight = { enable = true },
-                indent = { enable = true },
-                -- Incremental selection
-                incremental_selection = {
-                    enable = true,
-                    keymaps = {
-                        init_selection = "<C-space>",
-                        node_incremental = "<C-space>",
-                        scope_incremental = false,
-                        node_decremental = "<bs>",
-                    },
-                },
+            -- Install parsers
+            require("nvim-treesitter").install({
+                -- Core
+                "lua", "vim", "vimdoc", "bash", "regex",
+                -- Rust
+                "rust", "toml",
+                -- Web / Frontend
+                "javascript", "typescript", "tsx", "html", "css", "scss",
+                -- Data
+                "json", "jsonc", "yaml", "xml",
+                -- Docs
+                "markdown", "markdown_inline",
+                -- Other
+                "python", "go", "c", "cpp",
+                -- Git
+                "gitcommit", "gitignore", "diff",
+            })
+
+            -- Enable treesitter highlighting for all filetypes
+            vim.api.nvim_create_autocmd("FileType", {
+                callback = function()
+                    pcall(vim.treesitter.start)
+                end,
+            })
+
+            -- Enable treesitter-based folding
+            vim.api.nvim_create_autocmd("FileType", {
+                callback = function()
+                    vim.wo[0][0].foldexpr = "v:lua.vim.treesitter.foldexpr()"
+                    vim.wo[0][0].foldmethod = "expr"
+                    vim.wo[0][0].foldenable = false  -- Start with folds open
+                end,
+            })
+
+            -- Enable treesitter-based indentation
+            vim.api.nvim_create_autocmd("FileType", {
+                callback = function()
+                    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+                end,
             })
         end,
     },
