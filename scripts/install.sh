@@ -106,6 +106,8 @@ install_packages \
 section "Installing fonts"
 install_packages \
     ttf-jetbrains-mono-nerd \
+    ttf-nerd-fonts-symbols-common \
+    ttf-nerd-fonts-symbols-mono \
     noto-fonts \
     noto-fonts-emoji
 
