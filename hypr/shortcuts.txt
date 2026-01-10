@@ -57,6 +57,7 @@ Space + H/J/K/L     Resize splits
 Space + c           New tab
 Space + t / T       Next / previous tab
 Space + 1-5         Switch to tab 1-5
+Space + ,           Rename tab
 Space + s           Save file
 Space + q           Quit
 Space + e           Toggle file explorer

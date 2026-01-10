@@ -85,6 +85,15 @@ map("n", "<leader>3", "3gt", { desc = "Tab 3" })
 map("n", "<leader>4", "4gt", { desc = "Tab 4" })
 map("n", "<leader>5", "5gt", { desc = "Tab 5" })
 
+-- Rename tab
+map("n", "<leader>,", function()
+    vim.ui.input({ prompt = "Tab name: " }, function(name)
+        if name and name ~= "" then
+            vim.cmd("TabRename " .. name)
+        end
+    end)
+end, { desc = "Rename tab" })
+
 -- ── Save & Quit ───────────────────────────────────────────────
 map("n", "<leader>s", ":w<CR>", { desc = "Save" })
 map("n", "<leader>q", ":q<CR>", { desc = "Quit" })
@@ -97,6 +106,46 @@ map("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move line up" })
 -- Better indenting
 map("v", "<", "<gv")
 map("v", ">", ">gv")
+
+-- ── Tab Naming ────────────────────────────────────────────────
+-- Store tab names
+vim.g.tab_names = {}
+
+-- Command to rename tab
+vim.api.nvim_create_user_command("TabRename", function(opts)
+    vim.g.tab_names[vim.api.nvim_get_current_tabpage()] = opts.args
+    vim.cmd("redrawtabline")
+end, { nargs = 1 })
+
+-- Custom tabline with names
+function _G.custom_tabline()
+    local s = ""
+    for i = 1, vim.fn.tabpagenr("$") do
+        local tabid = vim.api.nvim_list_tabpages()[i]
+        local is_current = i == vim.fn.tabpagenr()
+        
+        -- Highlight
+        s = s .. (is_current and "%#TabLineSel#" or "%#TabLine#")
+        
+        -- Tab number
+        s = s .. " " .. i .. ":"
+        
+        -- Tab name or filename
+        local name = vim.g.tab_names[tabid]
+        if not name or name == "" then
+            local buflist = vim.fn.tabpagebuflist(i)
+            local bufname = vim.fn.bufname(buflist[1])
+            name = vim.fn.fnamemodify(bufname, ":t")
+            if name == "" then name = "[No Name]" end
+        end
+        s = s .. name .. " "
+    end
+    s = s .. "%#TabLineFill#"
+    return s
+end
+
+vim.o.tabline = "%!v:lua.custom_tabline()"
+vim.o.showtabline = 2  -- Always show tabline
 
 -- ── Bootstrap lazy.nvim ────────────────────────────────────────
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
