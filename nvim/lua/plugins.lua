@@ -43,13 +43,34 @@ return {
         config = function()
             require("nvim-treesitter.configs").setup({
                 ensure_installed = {
-                    "lua", "vim", "vimdoc", "bash",
-                    "python", "javascript", "typescript",
-                    "json", "yaml", "markdown",
+                    -- Core
+                    "lua", "vim", "vimdoc", "bash", "regex",
+                    -- Rust
+                    "rust", "toml",
+                    -- Web / Frontend
+                    "javascript", "typescript", "tsx", "html", "css", "scss",
+                    -- Data
+                    "json", "jsonc", "yaml", "xml",
+                    -- Docs
+                    "markdown", "markdown_inline",
+                    -- Other
+                    "python", "go", "c", "cpp",
+                    -- Git
+                    "gitcommit", "gitignore", "diff",
                 },
                 auto_install = true,
                 highlight = { enable = true },
                 indent = { enable = true },
+                -- Incremental selection
+                incremental_selection = {
+                    enable = true,
+                    keymaps = {
+                        init_selection = "<C-space>",
+                        node_incremental = "<C-space>",
+                        scope_incremental = false,
+                        node_decremental = "<bs>",
+                    },
+                },
             })
         end,
     },

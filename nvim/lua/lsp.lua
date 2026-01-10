@@ -23,41 +23,11 @@ return {
     -- ── Mason LSPConfig bridge ───────────────────────────────────
     {
         "williamboman/mason-lspconfig.nvim",
-        dependencies = { "williamboman/mason.nvim" },
-        config = function()
-            require("mason-lspconfig").setup({
-                ensure_installed = {
-                    -- TypeScript / JavaScript / React
-                    "ts_ls",
-                    -- Frontend
-                    "html",
-                    "cssls",
-                    "tailwindcss",
-                    "emmet_ls",
-                    -- Markdown
-                    "marksman",
-                    -- Config files
-                    "taplo",      -- TOML
-                    "jsonls",     -- JSON
-                    -- Lua (for Neovim config)
-                    "lua_ls",
-                    -- Note: rust_analyzer is handled by rustaceanvim
-                },
-                automatic_installation = true,
-            })
-        end,
-    },
-
-    -- ── LSP Config ───────────────────────────────────────────────
-    {
-        "neovim/nvim-lspconfig",
         dependencies = {
             "williamboman/mason.nvim",
-            "williamboman/mason-lspconfig.nvim",
             "hrsh7th/cmp-nvim-lsp",
         },
         config = function()
-            local lspconfig = require("lspconfig")
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
             -- Keymaps (applied when LSP attaches)
@@ -80,93 +50,82 @@ return {
                 map("<leader>d", vim.diagnostic.open_float, "Show diagnostic")
             end
 
-            -- Note: Rust is handled by rustaceanvim plugin
-
-            -- ── TypeScript / JavaScript / React ──────────────────
-            lspconfig.ts_ls.setup({
-                capabilities = capabilities,
-                on_attach = on_attach,
-                settings = {
-                    typescript = {
-                        inlayHints = {
-                            includeInlayParameterNameHints = "all",
-                            includeInlayFunctionParameterTypeHints = true,
-                        },
-                    },
-                },
-            })
-
-            -- ── HTML ─────────────────────────────────────────────
-            lspconfig.html.setup({
-                capabilities = capabilities,
-                on_attach = on_attach,
-            })
-
-            -- ── CSS ──────────────────────────────────────────────
-            lspconfig.cssls.setup({
-                capabilities = capabilities,
-                on_attach = on_attach,
-            })
-
-            -- ── Tailwind CSS ─────────────────────────────────────
-            lspconfig.tailwindcss.setup({
-                capabilities = capabilities,
-                on_attach = on_attach,
-            })
-
-            -- ── Emmet (HTML/CSS snippets) ────────────────────────
-            lspconfig.emmet_ls.setup({
-                capabilities = capabilities,
-                on_attach = on_attach,
-                filetypes = {
-                    "html", "css", "scss", "javascript", "javascriptreact",
-                    "typescript", "typescriptreact", "vue", "svelte",
-                },
-            })
-
-            -- ── Markdown ─────────────────────────────────────────
-            lspconfig.marksman.setup({
-                capabilities = capabilities,
-                on_attach = on_attach,
-            })
-
-            -- ── TOML ─────────────────────────────────────────────
-            lspconfig.taplo.setup({
-                capabilities = capabilities,
-                on_attach = on_attach,
-            })
-
-            -- ── JSON ─────────────────────────────────────────────
-            lspconfig.jsonls.setup({
-                capabilities = capabilities,
-                on_attach = on_attach,
-                settings = {
-                    json = {
-                        schemas = require("schemastore").schemas(),
-                        validate = { enable = true },
-                    },
-                },
-            })
-
-            -- ── Lua (for Neovim config) ──────────────────────────
-            lspconfig.lua_ls.setup({
-                capabilities = capabilities,
-                on_attach = on_attach,
-                settings = {
-                    Lua = {
-                        diagnostics = { globals = { "vim" } },
-                        workspace = { checkThirdParty = false },
-                        telemetry = { enable = false },
-                    },
-                },
-            })
-
             -- Diagnostic signs
             local signs = { Error = " ", Warn = " ", Hint = "󰌵 ", Info = " " }
             for type, icon in pairs(signs) do
                 local hl = "DiagnosticSign" .. type
                 vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
             end
+
+            -- Server-specific settings
+            local server_settings = {
+                ts_ls = {
+                    settings = {
+                        typescript = {
+                            inlayHints = {
+                                includeInlayParameterNameHints = "all",
+                                includeInlayFunctionParameterTypeHints = true,
+                            },
+                        },
+                    },
+                },
+                emmet_ls = {
+                    filetypes = {
+                        "html", "css", "scss", "javascript", "javascriptreact",
+                        "typescript", "typescriptreact", "vue", "svelte",
+                    },
+                },
+                jsonls = {
+                    settings = {
+                        json = {
+                            schemas = require("schemastore").schemas(),
+                            validate = { enable = true },
+                        },
+                    },
+                },
+                lua_ls = {
+                    settings = {
+                        Lua = {
+                            diagnostics = { globals = { "vim" } },
+                            workspace = { checkThirdParty = false },
+                            telemetry = { enable = false },
+                        },
+                    },
+                },
+            }
+
+            require("mason-lspconfig").setup({
+                ensure_installed = {
+                    "ts_ls",
+                    "html",
+                    "cssls",
+                    "tailwindcss",
+                    "emmet_ls",
+                    "marksman",
+                    "taplo",
+                    "jsonls",
+                    "lua_ls",
+                    -- Note: rust_analyzer is handled by rustaceanvim
+                },
+                automatic_installation = true,
+                handlers = {
+                    -- Default handler for all servers
+                    function(server_name)
+                        local opts = {
+                            capabilities = capabilities,
+                            on_attach = on_attach,
+                        }
+                        -- Merge server-specific settings
+                        if server_settings[server_name] then
+                            opts = vim.tbl_deep_extend("force", opts, server_settings[server_name])
+                        end
+                        vim.lsp.enable(server_name)
+                        vim.lsp.config(server_name, opts)
+                    end,
+                    -- Skip rust_analyzer (handled by rustaceanvim)
+                    ["rust_analyzer"] = function() end,
+                },
+            })
         end,
     },
 
@@ -263,4 +222,3 @@ return {
         end,
     },
 }
-

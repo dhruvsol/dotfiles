@@ -80,20 +80,20 @@ install_neovim() {
 install_deps() {
     section "Installing dependencies"
     
-    # Core dependencies
+    # Core dependencies (includes C compiler for Treesitter)
     info "Installing core dependencies..."
     case $PM in
         pacman)
-            $INSTALL git curl unzip ripgrep fd nodejs npm
+            $INSTALL git curl unzip ripgrep fd nodejs npm gcc tree-sitter
             ;;
         apt)
-            $INSTALL git curl unzip ripgrep fd-find nodejs npm
+            $INSTALL git curl unzip ripgrep fd-find nodejs npm build-essential
             ;;
         dnf)
-            $INSTALL git curl unzip ripgrep fd-find nodejs npm
+            $INSTALL git curl unzip ripgrep fd-find nodejs npm gcc gcc-c++
             ;;
         brew)
-            $INSTALL git curl unzip ripgrep fd node
+            $INSTALL git curl unzip ripgrep fd node tree-sitter
             ;;
     esac
     success "Core dependencies installed"
@@ -152,6 +152,12 @@ install_plugins() {
     nvim --headless "+Lazy! sync" +qa 2>/dev/null || true
     
     success "Plugins installed"
+    
+    # Install/update Treesitter parsers
+    info "Installing Treesitter parsers..."
+    nvim --headless "+TSUpdate" +qa 2>/dev/null || true
+    
+    success "Treesitter parsers installed"
 }
 
 # ── Verify installation ────────────────────────────────────────

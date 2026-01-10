@@ -21,31 +21,31 @@ WIDTH=$(get_width)
 # Set sizes based on resolution
 if [ "$WIDTH" -ge 3840 ]; then
     # 4K
-    FONT_SIZE="14px"
-    BAR_WIDTH="42"
-    ICON_SIZE="16px"
-    MODULE_PADDING="12"
-    BORDER_RADIUS="10"
+    FONT_SIZE="22px"
+    BAR_WIDTH="56"
+    ICON_SIZE="24px"
+    MODULE_PADDING="16"
+    BORDER_RADIUS="12"
 elif [ "$WIDTH" -ge 2560 ]; then
     # 1440p
-    FONT_SIZE="11px"
-    BAR_WIDTH="34"
-    ICON_SIZE="13px"
-    MODULE_PADDING="8"
-    BORDER_RADIUS="8"
+    FONT_SIZE="16px"
+    BAR_WIDTH="44"
+    ICON_SIZE="18px"
+    MODULE_PADDING="12"
+    BORDER_RADIUS="10"
 elif [ "$WIDTH" -ge 1920 ]; then
     # 1080p
-    FONT_SIZE="10px"
-    BAR_WIDTH="28"
-    ICON_SIZE="11px"
-    MODULE_PADDING="6"
+    FONT_SIZE="12px"
+    BAR_WIDTH="32"
+    ICON_SIZE="14px"
+    MODULE_PADDING="8"
     BORDER_RADIUS="6"
 else
     # Small screens
-    FONT_SIZE="9px"
-    BAR_WIDTH="24"
-    ICON_SIZE="10px"
-    MODULE_PADDING="4"
+    FONT_SIZE="10px"
+    BAR_WIDTH="26"
+    ICON_SIZE="12px"
+    MODULE_PADDING="6"
     BORDER_RADIUS="4"
 fi
 

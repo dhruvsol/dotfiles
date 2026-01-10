@@ -98,11 +98,11 @@ Alt + e             Cycle through panes
 Alt + t / T         Next / previous window
 Alt + h/j/k/l       Navigate panes
 Alt + H/J/K/L       Resize panes
-Alt + c             New window
+Alt + q             New window
 Alt + 1-5           Switch to window 1-5
 Alt + r             Reload config
 Alt + d             Detach session
-Alt + x             Kill pane
+Alt + c             Kill pane
 Alt + v             Enter copy mode
 Alt + p             Paste
 
