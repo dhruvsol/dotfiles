@@ -38,9 +38,9 @@ section() {
     echo -e "${MAGENTA}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 }
 
-# ── Update system ───────────────────────────────────────────────
-section "Updating system"
-sudo pacman -Syu --noconfirm
+# ── Sync package database ────────────────────────────────────────
+section "Syncing package database"
+sudo pacman -Sy --noconfirm
 
 # ── Core packages ───────────────────────────────────────────────
 section "Installing core packages"
@@ -91,6 +91,11 @@ install_packages \
 section "Installing display utilities"
 install_packages \
     brightnessctl
+
+# ── Power Management ─────────────────────────────────────────────
+section "Installing power management"
+install_packages \
+    power-profiles-daemon
 
 # ── Notifications ───────────────────────────────────────────────
 section "Installing notification daemon"
@@ -170,6 +175,9 @@ sudo systemctl enable --now NetworkManager 2>/dev/null || true
 
 echo -e "${BLUE}Enabling PipeWire...${NC}"
 systemctl --user enable --now pipewire pipewire-pulse wireplumber 2>/dev/null || true
+
+echo -e "${BLUE}Enabling Power Profiles Daemon...${NC}"
+sudo systemctl enable --now power-profiles-daemon 2>/dev/null || true
 
 # ── Stow Dotfiles ───────────────────────────────────────────────
 section "Stowing dotfiles"

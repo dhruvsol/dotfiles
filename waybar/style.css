@@ -24,6 +24,7 @@ window#waybar {
 #pulseaudio,
 #mpris,
 #network,
+#custom-power-profile,
 #battery,
 #tray {
   padding: 4px 2px;
@@ -122,6 +123,28 @@ window#waybar {
 
 #network.disconnected {
   color: #f7768e;
+}
+
+/* Power Profile */
+#custom-power-profile {
+  font-size: 12px;
+  color: #7aa2f7;
+}
+
+#custom-power-profile.performance {
+  color: #f7768e;
+}
+
+#custom-power-profile.balanced {
+  color: #7aa2f7;
+}
+
+#custom-power-profile.power-saver {
+  color: #9ece6a;
+}
+
+#custom-power-profile.unavailable {
+  color: #565f89;
 }
 
 /* Battery */
