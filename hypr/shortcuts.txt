@@ -79,6 +79,18 @@ Space + d           Show diagnostic
 Tab / Shift+Tab     Completion navigation
 Ctrl + Space        Trigger completion
 
+# ── Zsh ────────────────────────────────────────────────────────
+Ctrl + R            Fuzzy search history (fzf)
+Ctrl + T            Fuzzy find files (fzf)
+Alt + C             Fuzzy cd into directory (fzf)
+z <query>           Smart cd (zoxide)
+zi                  Interactive cd (zoxide)
+Esc Esc             Prefix with sudo (OMZP::sudo)
+Tab                 Fuzzy completion (fzf-tab)
+Ctrl + Left/Right   Jump words
+reload              Reload zsh config
+vi / vim            Opens Neovim
+
 # ── Tmux ──────────────────────────────────────
 Alt + E             Split vertical
 Alt + W             Split horizontal

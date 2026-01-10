@@ -56,12 +56,17 @@ install_packages \
     xdg-desktop-portal-hyprland \
     wl-clipboard
 
-# ── Terminal & Editor ───────────────────────────────────────────
-section "Installing terminal & editor"
+# ── Terminal & Shell ────────────────────────────────────────────
+section "Installing terminal & shell"
 install_packages \
     alacritty \
     tmux \
-    neovim
+    neovim \
+    zsh \
+    starship \
+    fzf \
+    zoxide \
+    fd
 
 # ── Status Bar ──────────────────────────────────────────────────
 section "Installing Waybar"
