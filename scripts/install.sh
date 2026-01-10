@@ -32,20 +32,6 @@ install_packages() {
     sudo pacman -S --needed --noconfirm "${packages[@]}" || true
 }
 
-install_aur() {
-    local packages=("$@")
-    if command -v yay &> /dev/null; then
-        echo -e "\n${BLUE}Installing (AUR): ${NC}${packages[*]}\n"
-        yay -S --needed --noconfirm "${packages[@]}" || true
-    elif command -v paru &> /dev/null; then
-        echo -e "\n${BLUE}Installing (AUR): ${NC}${packages[*]}\n"
-        paru -S --needed --noconfirm "${packages[@]}" || true
-    else
-        echo -e "${YELLOW}!${NC} No AUR helper found. Skipping: ${packages[*]}"
-        echo -e "  Install yay or paru first for AUR packages."
-    fi
-}
-
 section() {
     echo -e "\n${MAGENTA}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
     echo -e "${CYAN}$1${NC}"
@@ -59,40 +45,22 @@ sudo pacman -Syu --noconfirm
 # ── Core packages ───────────────────────────────────────────────
 section "Installing core packages"
 install_packages \
-    base-devel \
     git \
-    stow \
-    wget \
-    curl \
-    unzip
+    stow
 
 # ── Hyprland & Wayland ──────────────────────────────────────────
 section "Installing Hyprland & Wayland"
 install_packages \
     hyprland \
+    hyprpaper \
     xdg-desktop-portal-hyprland \
-    xdg-utils \
-    wayland \
-    wayland-protocols \
-    wl-clipboard \
-    cliphist \
-    grim \
-    slurp
+    wl-clipboard
 
-# ── Display & Graphics ──────────────────────────────────────────
-section "Installing display utilities"
-install_packages \
-    brightnessctl \
-    qt5-wayland \
-    qt6-wayland
-
-# ── Terminal & Shell ────────────────────────────────────────────
-section "Installing terminal & shell"
+# ── Terminal ────────────────────────────────────────────────────
+section "Installing terminal"
 install_packages \
     alacritty \
-    tmux \
-    zsh \
-    starship
+    tmux
 
 # ── Status Bar ──────────────────────────────────────────────────
 section "Installing Waybar"
@@ -104,90 +72,40 @@ section "Installing Rofi"
 install_packages \
     rofi
 
-# ── Audio ───────────────────────────────────────────────────────
+# ── Audio (for Waybar volume control) ───────────────────────────
 section "Installing audio"
 install_packages \
     pipewire \
-    pipewire-alsa \
-    pipewire-audio \
     pipewire-pulse \
     wireplumber \
-    pavucontrol \
     playerctl
+
+# ── Display (for Waybar backlight) ──────────────────────────────
+section "Installing display utilities"
+install_packages \
+    brightnessctl
 
 # ── Network ─────────────────────────────────────────────────────
 section "Installing network tools"
 install_packages \
-    networkmanager \
-    network-manager-applet \
-    nm-connection-editor
-
-# ── Notifications ───────────────────────────────────────────────
-section "Installing notifications"
-install_packages \
-    dunst \
-    libnotify
-
-# ── File Manager ────────────────────────────────────────────────
-section "Installing file manager"
-install_packages \
-    thunar \
-    tumbler \
-    gvfs
+    networkmanager
 
 # ── Fonts ───────────────────────────────────────────────────────
 section "Installing fonts"
 install_packages \
     ttf-jetbrains-mono-nerd \
-    ttf-font-awesome \
     noto-fonts \
-    noto-fonts-emoji \
-    noto-fonts-cjk
+    noto-fonts-emoji
 
-# ── Themes & Icons ──────────────────────────────────────────────
-section "Installing themes"
+# ── Icons (for Rofi) ────────────────────────────────────────────
+section "Installing icons"
 install_packages \
-    papirus-icon-theme \
-    gnome-themes-extra \
-    gtk-engine-murrine
-
-# ── Screenshot & Screen ─────────────────────────────────────────
-section "Installing screenshot tools"
-install_packages \
-    grim \
-    slurp \
-    swappy
-
-# ── Lock Screen ─────────────────────────────────────────────────
-section "Installing lock screen"
-install_packages \
-    hyprlock
-
-# ── Wallpaper ───────────────────────────────────────────────────
-section "Installing wallpaper daemon"
-install_packages \
-    hyprpaper
+    papirus-icon-theme
 
 # ── Browser ─────────────────────────────────────────────────────
 section "Installing browser"
 install_packages \
     firefox
-
-# ── AUR Packages (optional) ─────────────────────────────────────
-section "Installing AUR packages"
-
-# Check for AUR helper, install yay if not present
-if ! command -v yay &> /dev/null && ! command -v paru &> /dev/null; then
-    echo -e "${YELLOW}Installing yay (AUR helper)...${NC}"
-    git clone https://aur.archlinux.org/yay.git /tmp/yay
-    cd /tmp/yay
-    makepkg -si --noconfirm
-    cd -
-    rm -rf /tmp/yay
-fi
-
-install_aur \
-    wlogout \
 
 # ── Enable Services ─────────────────────────────────────────────
 section "Enabling services"
@@ -204,9 +122,9 @@ section "Stowing dotfiles"
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 DOTFILES_DIR="$(dirname "$SCRIPT_DIR")"
 
-if [[ -f "$DOTFILES_DIR/stow.sh" ]]; then
-    chmod +x "$DOTFILES_DIR/stow.sh"
-    bash "$DOTFILES_DIR/stow.sh"
+if [[ -f "$DOTFILES_DIR/scripts/stow.sh" ]]; then
+    chmod +x "$DOTFILES_DIR/scripts/stow.sh"
+    bash "$DOTFILES_DIR/scripts/stow.sh"
 else
     echo -e "${YELLOW}!${NC} stow.sh not found, skipping dotfiles"
 fi
@@ -225,9 +143,5 @@ echo -e "\n${CYAN}Next steps:${NC}"
 echo -e "  1. Log out and select Hyprland at login"
 echo -e "  2. Press ${BLUE}Super + Q${NC} for terminal"
 echo -e "  3. Press ${BLUE}Super + R${NC} for app launcher"
+echo -e "  4. Press ${BLUE}Super + /${NC} for shortcuts menu"
 echo -e ""
-echo -e "${YELLOW}Optional:${NC}"
-echo -e "  • Set zsh as default: ${BLUE}chsh -s /bin/zsh${NC}"
-echo -e "  • Update font cache: ${BLUE}fc-cache -fv${NC}"
-echo -e ""
-

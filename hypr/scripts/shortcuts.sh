@@ -13,20 +13,33 @@ if [[ ! -f "$SHORTCUTS_FILE" ]]; then
     exit 1
 fi
 
-# Parse and display shortcuts
-# Filter out comments starting with # (but keep section headers)
-# Format: "Shortcut    Description"
+# Parse shortcuts and prefix each command with its category
+# This allows searching by category name to show related commands
 
-cat "$SHORTCUTS_FILE" | \
-    grep -v "^#.*═" | \
-    grep -v "^$" | \
-    sed 's/^# ── /━━ /g' | \
-    sed 's/ ─.*//g' | \
+current_category=""
+output=""
+
+while IFS= read -r line; do
+    # Skip decorative lines
+    [[ "$line" =~ ^#.*═ ]] && continue
+    # Skip empty lines
+    [[ -z "$line" ]] && continue
+    
+    # Check if this is a category header
+    if [[ "$line" =~ ^#\ ──\ (.+)\ ─ ]]; then
+        current_category="${BASH_REMATCH[1]}"
+        output+="━━ ${current_category} ━━\n"
+    else
+        # Regular shortcut line - prefix with category for searching
+        output+="[${current_category}] ${line}\n"
+    fi
+done < "$SHORTCUTS_FILE"
+
+echo -e "$output" | \
     rofi -dmenu \
         -p "⌨ Shortcuts" \
-        -theme-str 'window {width: 500px; height: 600px;}' \
-        -theme-str 'listview {lines: 20;}' \
+        -theme-str 'window {width: 550px; height: 650px;}' \
+        -theme-str 'listview {lines: 22;}' \
         -i \
         -no-custom \
     > /dev/null
-
