@@ -28,6 +28,7 @@ PACKAGES=(
     "code:$CONFIG_DIR/Code"
     "tmux:$CONFIG_DIR/tmux"
     "nvim:$CONFIG_DIR/nvim"
+    "mako:$CONFIG_DIR/mako"
     "zsh:$HOME"
 )
 

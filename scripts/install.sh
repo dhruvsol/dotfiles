@@ -91,6 +91,12 @@ section "Installing display utilities"
 install_packages \
     brightnessctl
 
+# ── Notifications ───────────────────────────────────────────────
+section "Installing notification daemon"
+install_packages \
+    mako \
+    libnotify
+
 # ── Network ─────────────────────────────────────────────────────
 section "Installing network tools"
 install_packages \
@@ -112,6 +118,47 @@ install_packages \
 section "Installing browser"
 install_packages \
     firefox
+
+# ── Communication ───────────────────────────────────────────────
+section "Installing communication apps"
+install_packages \
+    telegram-desktop
+
+# ── Office ──────────────────────────────────────────────────────
+section "Installing office suite"
+install_packages \
+    libreoffice-fresh
+
+# ── AUR Helper ──────────────────────────────────────────────────
+section "Setting up AUR"
+
+install_aur() {
+    local packages=("$@")
+    if command -v yay &> /dev/null; then
+        echo -e "${BLUE}Installing (AUR): ${NC}${packages[*]}"
+        yay -S --needed --noconfirm "${packages[@]}" || true
+    elif command -v paru &> /dev/null; then
+        echo -e "${BLUE}Installing (AUR): ${NC}${packages[*]}"
+        paru -S --needed --noconfirm "${packages[@]}" || true
+    else
+        echo -e "${YELLOW}!${NC} No AUR helper found. Skipping: ${packages[*]}"
+    fi
+}
+
+# Install yay if no AUR helper present
+if ! command -v yay &> /dev/null && ! command -v paru &> /dev/null; then
+    echo -e "${BLUE}Installing yay (AUR helper)...${NC}"
+    sudo pacman -S --needed --noconfirm base-devel git
+    git clone https://aur.archlinux.org/yay.git /tmp/yay
+    cd /tmp/yay && makepkg -si --noconfirm
+    cd - && rm -rf /tmp/yay
+fi
+
+# ── AUR Packages ────────────────────────────────────────────────
+section "Installing AUR packages"
+install_aur \
+    slack-desktop \
+    chatgpt-desktop-bin
 
 # ── Enable Services ─────────────────────────────────────────────
 section "Enabling services"
