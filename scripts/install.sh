@@ -46,7 +46,8 @@ sudo pacman -Syu --noconfirm
 section "Installing core packages"
 install_packages \
     git \
-    stow
+    stow \
+    jq
 
 # ── Hyprland & Wayland ──────────────────────────────────────────
 section "Installing Hyprland & Wayland"
