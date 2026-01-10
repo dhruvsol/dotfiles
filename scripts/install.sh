@@ -97,6 +97,12 @@ section "Installing power management"
 install_packages \
     power-profiles-daemon
 
+# ── Screen Lock ──────────────────────────────────────────────────
+section "Installing screen lock"
+install_packages \
+    hyprlock \
+    hypridle
+
 # ── Notifications ───────────────────────────────────────────────
 section "Installing notification daemon"
 install_packages \

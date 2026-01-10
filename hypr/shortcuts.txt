@@ -17,6 +17,7 @@ Super + E           Open file manager
 Super + W           Reload wallpaper
 Super + /           Show this shortcuts menu
 Super + X           Power menu (shutdown/reboot/sleep)
+Super + L           Lock screen
 
 # ── Workspaces ──────────────────────────────────────────────────
 Super + 1-9         Switch to workspace 1-9
