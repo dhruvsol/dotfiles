@@ -97,11 +97,12 @@ return {
             })
 
             -- JSON
+            local schemastore_ok, schemastore = pcall(require, "schemastore")
             vim.lsp.config("jsonls", {
                 capabilities = capabilities,
                 settings = {
                     json = {
-                        schemas = require("schemastore").schemas(),
+                        schemas = schemastore_ok and schemastore.schemas() or {},
                         validate = { enable = true },
                     },
                 },
