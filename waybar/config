@@ -28,7 +28,10 @@
         "on-click": "activate",
         "persistent-workspaces": {
             "*": 4
-        }
+        },
+        "ignore-workspaces": [
+            "9"
+        ]
     },
     "clock": {
         "format": "{:%H\n%M}",
