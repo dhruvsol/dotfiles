@@ -7,15 +7,35 @@
 
 CONFIG_DIR="$HOME/.config/waybar"
 
-# Get screen width
+# Get primary monitor info
+get_primary_monitor() {
+    if command -v hyprctl &> /dev/null; then
+        # Get the focused monitor (primary)
+        hyprctl monitors -j 2>/dev/null | jq -r '.[] | select(.focused == true) | .name' 2>/dev/null || echo ""
+    else
+        echo ""
+    fi
+}
+
 get_width() {
     if command -v hyprctl &> /dev/null; then
-        hyprctl monitors -j 2>/dev/null | jq -r '.[0].width' 2>/dev/null || echo "1920"
+        # Get width of focused (primary) monitor
+        hyprctl monitors -j 2>/dev/null | jq -r '.[] | select(.focused == true) | .width' 2>/dev/null || echo "1920"
     else
         echo "1920"
     fi
 }
 
+get_monitor_count() {
+    if command -v hyprctl &> /dev/null; then
+        hyprctl monitors -j 2>/dev/null | jq 'length' 2>/dev/null || echo "1"
+    else
+        echo "1"
+    fi
+}
+
+PRIMARY_MONITOR=$(get_primary_monitor)
+MONITOR_COUNT=$(get_monitor_count)
 WIDTH=$(get_width)
 
 # Set sizes based on resolution
@@ -79,10 +99,19 @@ EOF
 pkill waybar 2>/dev/null
 sleep 0.2
 
-# Update config with correct width
+# Update config with correct width and output
 TMP_CONFIG="/tmp/waybar-config.json"
 if [ -f "$CONFIG_DIR/config" ]; then
-    jq --argjson w "$BAR_WIDTH" '.width = $w' "$CONFIG_DIR/config" > "$TMP_CONFIG" 2>/dev/null || cp "$CONFIG_DIR/config" "$TMP_CONFIG"
+    # If multiple monitors, set output to primary only
+    if [ "$MONITOR_COUNT" -gt 1 ] && [ -n "$PRIMARY_MONITOR" ]; then
+        jq --argjson w "$BAR_WIDTH" --arg out "$PRIMARY_MONITOR" \
+            '.width = $w | .output = $out' \
+            "$CONFIG_DIR/config" > "$TMP_CONFIG" 2>/dev/null || cp "$CONFIG_DIR/config" "$TMP_CONFIG"
+    else
+        # Single monitor - no output restriction
+        jq --argjson w "$BAR_WIDTH" '.width = $w | del(.output)' \
+            "$CONFIG_DIR/config" > "$TMP_CONFIG" 2>/dev/null || cp "$CONFIG_DIR/config" "$TMP_CONFIG"
+    fi
 else
     cp "$CONFIG_DIR/config" "$TMP_CONFIG"
 fi
