@@ -1,6 +1,7 @@
 {
     "layer": "top",
     "position": "right",
+    "output": "DP-4",
     "width": 28,
     "spacing": 2,
     "margin-top": 6,
