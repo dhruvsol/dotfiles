@@ -18,6 +18,14 @@ Super + W           Reload wallpaper
 Super + /           Show this shortcuts menu
 Super + X           Power menu (shutdown/reboot/sleep)
 Super + L           Lock screen
+Super + U           Utils menu (screenshot/clipboard/etc)
+Super + V           Clipboard history
+
+# ── Screenshots ─────────────────────────────────────────────────
+Print               Full screen screenshot
+Super + Print       Select area screenshot
+Super + Shift + S   Area to clipboard
+Super + Shift + Print  Screenshot + edit
 
 # ── Workspaces ──────────────────────────────────────────────────
 Super + 1-9         Switch to workspace 1-9

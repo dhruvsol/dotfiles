@@ -103,6 +103,16 @@ install_packages \
     hyprlock \
     hypridle
 
+# ── Screenshot & Clipboard ───────────────────────────────────────
+section "Installing screenshot & clipboard tools"
+install_packages \
+    grim \
+    slurp \
+    swappy \
+    wf-recorder \
+    cliphist \
+    hyprpicker
+
 # ── Notifications ───────────────────────────────────────────────
 section "Installing notification daemon"
 install_packages \
