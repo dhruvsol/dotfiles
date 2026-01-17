@@ -11,11 +11,46 @@ return {
         config = function()
             require("tokyonight").setup({
                 style = "night",
-                transparent = true,
+                transparent = false,  -- Disabled transparency for better readability
                 styles = {
-                    sidebars = "transparent",
-                    floats = "transparent",
+                    sidebars = "dark",
+                    floats = "dark",
                 },
+                on_colors = function(colors)
+                    -- Make backgrounds more visible
+                    colors.bg_popup = "#1a1b26"
+                    colors.bg_float = "#1a1b26"
+                end,
+                on_highlights = function(hl, colors)
+                    -- Popup menu (completion menu) colors
+                    hl.Pmenu = { bg = colors.bg_popup, fg = colors.fg }
+                    hl.PmenuSel = { bg = colors.blue2, fg = colors.bg_dark, bold = true }
+                    hl.PmenuSbar = { bg = colors.bg_popup }
+                    hl.PmenuThumb = { bg = colors.fg_gutter }
+
+                    -- CMP specific highlights for better distinction
+                    hl.CmpItemAbbrMatch = { fg = colors.blue, bold = true }
+                    hl.CmpItemAbbrMatchFuzzy = { fg = colors.blue, bold = true }
+                    hl.CmpItemKindVariable = { fg = colors.magenta }
+                    hl.CmpItemKindFunction = { fg = colors.blue }
+                    hl.CmpItemKindMethod = { fg = colors.blue }
+                    hl.CmpItemKindKeyword = { fg = colors.cyan }
+                    hl.CmpItemKindProperty = { fg = colors.green1 }
+                    hl.CmpItemKindUnit = { fg = colors.orange }
+                    hl.CmpItemKindClass = { fg = colors.yellow }
+                    hl.CmpItemKindModule = { fg = colors.purple }
+                    hl.CmpItemKindStruct = { fg = colors.yellow }
+                    hl.CmpItemKindEnum = { fg = colors.yellow }
+                    hl.CmpItemKindSnippet = { fg = colors.red }
+
+                    -- Float windows
+                    hl.NormalFloat = { bg = colors.bg_popup, fg = colors.fg }
+                    hl.FloatBorder = { bg = colors.bg_popup, fg = colors.blue }
+                    hl.FloatTitle = { bg = colors.bg_popup, fg = colors.blue, bold = true }
+
+                    -- LSP signature help
+                    hl.LspSignatureActiveParameter = { fg = colors.orange, bold = true, underline = true }
+                end,
             })
             vim.cmd.colorscheme("tokyonight-night")
         end,
@@ -99,13 +134,50 @@ return {
         "nvim-telescope/telescope.nvim",
         branch = "0.1.x",
         dependencies = { "nvim-lua/plenary.nvim" },
+        cmd = "Telescope",
         keys = {
-            { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find files" },
-            { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Live grep" },
-            { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
-            { "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Help tags" },
-            { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent files" },
+            { "<leader>ff", function() require("telescope.builtin").find_files() end, desc = "Find files" },
+            { "<leader>fg", function() require("telescope.builtin").live_grep() end, desc = "Live grep" },
+            { "<leader>fb", function() require("telescope.builtin").buffers() end, desc = "Buffers" },
+            { "<leader>fh", function() require("telescope.builtin").help_tags() end, desc = "Help tags" },
+            { "<leader>fr", function() require("telescope.builtin").oldfiles() end, desc = "Recent files" },
         },
+        config = function()
+            -- Fix for Neovim 0.11+ treesitter API changes
+            local ts_utils = require("telescope.previewers.utils")
+            local original_highlighter = ts_utils.ts_highlighter
+            ts_utils.ts_highlighter = function(bufnr, ft)
+                -- Gracefully handle treesitter errors
+                local status_ok, _ = pcall(original_highlighter, bufnr, ft)
+                if not status_ok then
+                    -- Fallback to vim syntax highlighting
+                    vim.bo[bufnr].syntax = ft
+                end
+            end
+
+            require("telescope").setup({
+                defaults = {
+                    prompt_prefix = " ",
+                    selection_caret = " ",
+                    path_display = { "truncate" },
+                    layout_config = {
+                        horizontal = {
+                            preview_width = 0.55,
+                        },
+                    },
+                    -- Disable treesitter preview to avoid errors
+                    preview = {
+                        treesitter = false,
+                    },
+                },
+                pickers = {
+                    find_files = {
+                        hidden = true,
+                        find_command = { "rg", "--files", "--hidden", "--glob", "!.git/*" },
+                    },
+                },
+            })
+        end,
     },
 
     -- ── File explorer ────────────────────────────────────────────
@@ -252,33 +324,74 @@ return {
         end,
     },
 
-    -- ── Better inlay hints rendering ────────────────────────────
+    -- ── Easy text object selection ───────────────────────────────
     {
-        "lvimuser/lsp-inlayhints.nvim",
-        event = "LspAttach",
+        "echasnovski/mini.ai",
+        event = "VeryLazy",
         config = function()
-            require("lsp-inlayhints").setup({
-                inlay_hints = {
-                    parameter_hints = { prefix = "← " },
-                    type_hints = { prefix = "» ", remove_colon_start = true },
+            require("mini.ai").setup({
+                -- Configuration for custom text objects
+                n_lines = 500,
+                custom_textobjects = {
+                    -- Whole buffer
+                    e = function()
+                        local from = { line = 1, col = 1 }
+                        local to = {
+                            line = vim.fn.line("$"),
+                            col = math.max(vim.fn.getline("$"):len(), 1),
+                        }
+                        return { from = from, to = to }
+                    end,
                 },
             })
-
-            vim.api.nvim_create_autocmd("LspAttach", {
-                callback = function(args)
-                    local bufnr = args.buf
-                    local client = vim.lsp.get_client_by_id(args.data.client_id)
-                    if client.server_capabilities.inlayHintProvider then
-                        require("lsp-inlayhints").on_attach(client, bufnr)
-                    end
-                end,
-            })
-
-            -- Toggle inlay hints with <leader>th
-            vim.keymap.set("n", "<leader>th", function()
-                require("lsp-inlayhints").toggle()
-            end, { desc = "Toggle inlay hints" })
         end,
     },
+
+    -- ── Surround text objects ────────────────────────────────────
+    {
+        "echasnovski/mini.surround",
+        event = "VeryLazy",
+        config = function()
+            require("mini.surround").setup({
+                mappings = {
+                    add = "sa",            -- Add surrounding in Normal and Visual modes
+                    delete = "sd",         -- Delete surrounding
+                    find = "sf",           -- Find surrounding (to the right)
+                    find_left = "sF",      -- Find surrounding (to the left)
+                    highlight = "sh",      -- Highlight surrounding
+                    replace = "sr",        -- Replace surrounding
+                    update_n_lines = "sn", -- Update `n_lines`
+                },
+            })
+        end,
+    },
+
+    -- ── Flash (quick jump to any location) ──────────────────────
+    {
+        "folke/flash.nvim",
+        event = "VeryLazy",
+        opts = {
+            modes = {
+                char = {
+                    jump_labels = true,
+                },
+            },
+        },
+        keys = {
+            {
+                "s",
+                mode = { "n", "x", "o" },
+                function() require("flash").jump() end,
+                desc = "Flash jump",
+            },
+            {
+                "S",
+                mode = { "n", "x", "o" },
+                function() require("flash").treesitter() end,
+                desc = "Flash treesitter",
+            },
+        },
+    },
+
 }
 

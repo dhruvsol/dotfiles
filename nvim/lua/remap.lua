@@ -49,11 +49,36 @@ map("n", "<leader>s", ":w<CR>", { desc = "Save" })
 map("n", "<leader>q", ":q<CR>", { desc = "Quit" })
 map("n", "<leader>Q", ":qa!<CR>", { desc = "Quit all" })
 
--- ── Move lines ───────────────────────────────────────────────
-map("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move line down" })
-map("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move line up" })
+-- ── Move lines/blocks ───────────────────────────────────────
+-- Visual mode: move selected lines up/down
+map("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move selection down" })
+map("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move selection up" })
+
+-- Normal mode: move current line up/down with Alt+j/k
+map("n", "<A-j>", ":m .+1<CR>==", { desc = "Move line down" })
+map("n", "<A-k>", ":m .-2<CR>==", { desc = "Move line up" })
+
+-- Visual mode: alternative with Alt+j/k
+map("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move block down" })
+map("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move block up" })
 
 -- ── Better indenting ─────────────────────────────────────────
-map("v", "<", "<gv")
-map("v", ">", ">gv")
+-- Stay in visual mode after indenting
+map("v", "<", "<gv", { desc = "Indent left" })
+map("v", ">", ">gv", { desc = "Indent right" })
+
+-- ── Duplicate lines/blocks ───────────────────────────────────
+map("n", "<leader>d", "yyp", { desc = "Duplicate line" })
+map("v", "<leader>d", "y`>p", { desc = "Duplicate selection" })
+
+-- ── Quick selections ──────────────────────────────────────────
+-- Select entire line (without newline)
+map("n", "vv", "^v$h", { desc = "Select line content" })
+
+-- Select entire buffer
+map("n", "<leader>a", "ggVG", { desc = "Select all" })
+
+-- Expand selection incrementally (like VSCode Ctrl+D)
+map("v", "v", "<Plug>(expand_region_expand)", { desc = "Expand selection" })
+map("v", "<C-v>", "<Plug>(expand_region_shrink)", { desc = "Shrink selection" })
 
