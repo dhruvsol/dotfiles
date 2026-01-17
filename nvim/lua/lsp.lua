@@ -33,6 +33,7 @@ return {
             require("mason-lspconfig").setup({
                 ensure_installed = {
                     "ts_ls",
+                    "rust_analyzer",
                     "html",
                     "cssls",
                     "tailwindcss",
@@ -56,7 +57,32 @@ return {
                     typescript = {
                         inlayHints = {
                             includeInlayParameterNameHints = "all",
+                            includeInlayParameterNameTypeHints = true,
                             includeInlayFunctionParameterTypeHints = true,
+                            includeInlayVariableTypeHints = true,
+                            includeInlayPropertyDeclarationTypeHints = true,
+                            includeInlayFunctionLikeReturnTypeHints = true,
+                            includeInlayEnumMemberValueHints = true,
+                        },
+                        suggest = {
+                            completeFunctionCalls = true,
+                        },
+                        preferences = {
+                            importModuleSpecifier = "relative",
+                        },
+                    },
+                    javascript = {
+                        inlayHints = {
+                            includeInlayParameterNameHints = "all",
+                            includeInlayParameterNameTypeHints = true,
+                            includeInlayFunctionParameterTypeHints = true,
+                            includeInlayVariableTypeHints = true,
+                            includeInlayPropertyDeclarationTypeHints = true,
+                            includeInlayFunctionLikeReturnTypeHints = true,
+                            includeInlayEnumMemberValueHints = true,
+                        },
+                        suggest = {
+                            completeFunctionCalls = true,
                         },
                     },
                 },
@@ -102,7 +128,7 @@ return {
                 capabilities = capabilities,
                 settings = {
                     json = {
-                        schemas = schemastore_ok and schemastore.schemas() or {},
+                        schemas = schemastore_ok and schemastore.json.schemas() or {},
                         validate = { enable = true },
                     },
                 },
@@ -120,7 +146,7 @@ return {
                 },
             })
 
-            -- ── Enable all servers ──
+            -- ── Enable all servers (except rust_analyzer, handled by rustaceanvim) ──
             vim.lsp.enable({
                 "ts_ls",
                 "html",
@@ -222,6 +248,7 @@ return {
                 sources = cmp.config.sources({
                     { name = "nvim_lsp" },
                     { name = "luasnip" },
+                    { name = "crates" },
                     { name = "buffer" },
                     { name = "path" },
                 }),
@@ -244,15 +271,76 @@ return {
             vim.g.rustaceanvim = {
                 tools = {
                     hover_actions = { replace_builtin_hover = true },
+                    float_win_config = {
+                        border = "rounded",
+                    },
                 },
                 server = {
+                    on_attach = function(_, bufnr)
+                        -- Rust-specific keymaps
+                        local map = function(keys, func, desc)
+                            vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
+                        end
+
+                        map("<leader>rd", "<cmd>RustLsp debuggables<cr>", "Rust debuggables")
+                        map("<leader>rr", "<cmd>RustLsp runnables<cr>", "Rust runnables")
+                        map("<leader>rt", "<cmd>RustLsp testables<cr>", "Rust testables")
+                        map("<leader>re", "<cmd>RustLsp expandMacro<cr>", "Expand macro")
+                        map("<leader>rc", "<cmd>RustLsp openCargo<cr>", "Open Cargo.toml")
+                        map("<leader>rp", "<cmd>RustLsp parentModule<cr>", "Parent module")
+                        map("<leader>rj", "<cmd>RustLsp joinLines<cr>", "Join lines")
+                        map("K", "<cmd>RustLsp hover actions<cr>", "Hover actions")
+                    end,
                     default_settings = {
                         ["rust-analyzer"] = {
-                            checkOnSave = { command = "clippy" },
-                            cargo = { allFeatures = true },
+                            checkOnSave = {
+                                command = "clippy",
+                                extraArgs = { "--all", "--", "-W", "clippy::all" },
+                            },
+                            cargo = {
+                                allFeatures = true,
+                                loadOutDirsFromCheck = true,
+                                buildScripts = { enable = true },
+                            },
+                            procMacro = {
+                                enable = true,
+                                ignored = {
+                                    ["async-trait"] = { "async_trait" },
+                                    ["napi-derive"] = { "napi" },
+                                    ["async-recursion"] = { "async_recursion" },
+                                },
+                            },
+                            diagnostics = {
+                                enable = true,
+                                experimental = { enable = true },
+                                disabled = { "unresolved-proc-macro" },
+                            },
                             inlayHints = {
+                                bindingModeHints = { enable = true },
+                                chainingHints = { enable = true },
+                                closingBraceHints = { minLines = 10 },
                                 closureReturnTypeHints = { enable = "always" },
-                                lifetimeElisionHints = { enable = "always" },
+                                lifetimeElisionHints = {
+                                    enable = "always",
+                                    useParameterNames = true,
+                                },
+                                parameterHints = { enable = true },
+                                reborrowHints = { enable = "always" },
+                                renderColons = true,
+                                typeHints = {
+                                    enable = true,
+                                    hideClosureInitialization = false,
+                                    hideNamedConstructor = false,
+                                },
+                            },
+                            hover = {
+                                actions = { enable = true },
+                                documentation = { enable = true },
+                            },
+                            completion = {
+                                callable = { snippets = "fill_arguments" },
+                                postfix = { enable = true },
+                                autoimport = { enable = true },
                             },
                         },
                     },

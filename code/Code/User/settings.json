@@ -1,68 +1,7 @@
 {
-  // ═══════════════════════════════════════════════════════════════
-  // Sakura Night - VS Code Settings
-  // Theme recommendation: Tokyo Night or similar
-  // ═══════════════════════════════════════════════════════════════
-
-  // Theme & Appearance (install "Tokyo Night" extension for best match)
-  "workbench.colorTheme": "Tokyo Night",
-  "workbench.iconTheme": "material-icon-theme",
-
-  // Editor
-  "editor.fontSize": 14,
-  "editor.fontFamily": "'JetBrains Mono', 'Fira Code', 'Droid Sans Mono', monospace",
-  "editor.fontLigatures": true,
-  "editor.tabSize": 2,
-  "editor.insertSpaces": true,
-  "editor.wordWrap": "on",
-  "editor.cursorBlinking": "smooth",
-  "editor.cursorSmoothCaretAnimation": "on",
-  "editor.smoothScrolling": true,
-  "editor.minimap.enabled": false,
-  "editor.renderWhitespace": "selection",
-  "editor.bracketPairColorization.enabled": true,
-  "editor.guides.bracketPairs": true,
-  "editor.formatOnSave": true,
-  "editor.linkedEditing": true,
-
-  // Workbench
-  "workbench.startupEditor": "none",
-  "workbench.list.smoothScrolling": true,
-  "workbench.editor.enablePreview": false,
-
-  // Terminal - Sakura Night colors
-  "terminal.integrated.fontFamily": "'JetBrains Mono', monospace",
-  "terminal.integrated.fontSize": 13,
-  "terminal.integrated.smoothScrolling": true,
-  "workbench.colorCustomizations": {
-    "terminal.background": "#1a1b26",
-    "terminal.foreground": "#c0caf5",
-    "terminalCursor.background": "#1a1b26",
-    "terminalCursor.foreground": "#bb9af7",
-    "terminal.ansiBlack": "#15141b",
-    "terminal.ansiRed": "#f7768e",
-    "terminal.ansiGreen": "#9ece6a",
-    "terminal.ansiYellow": "#e0af68",
-    "terminal.ansiBlue": "#7aa2f7",
-    "terminal.ansiMagenta": "#bb9af7",
-    "terminal.ansiCyan": "#7dcfff",
-    "terminal.ansiWhite": "#a9b1d6",
-    "terminal.ansiBrightBlack": "#414868",
-    "terminal.ansiBrightRed": "#ff9e9e",
-    "terminal.ansiBrightGreen": "#b9f27c",
-    "terminal.ansiBrightYellow": "#ffc777",
-    "terminal.ansiBrightBlue": "#82aaff",
-    "terminal.ansiBrightMagenta": "#c0a0f0",
-    "terminal.ansiBrightCyan": "#89ddff",
-    "terminal.ansiBrightWhite": "#c0caf5"
-  },
-
-  // Files
-  "files.autoSave": "afterDelay",
-  "files.autoSaveDelay": 1000,
-  "files.trimTrailingWhitespace": true,
-  "files.insertFinalNewline": true,
-
-  // Telemetry
-  "telemetry.telemetryLevel": "off"
+    "gitlens.ai.model": "vscode",
+    "gitlens.ai.vscode.model": "copilot:gpt-4.1",
+    "workbench.sideBar.location": "right",
+    "workbench.iconTheme": "vscode-icons",
+    "claudeCode.preferredLocation": "panel"
 }

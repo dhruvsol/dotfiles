@@ -1,0 +1,43 @@
+# VSCode cache and generated files
+Backups/
+blob_storage/
+Cache/
+CachedConfigurations/
+CachedData/
+CachedExtensionVSIXs/
+CachedProfilesData/
+Code Cache/
+code.lock
+Cookies
+Cookies-journal
+Crashpad/
+DawnGraphiteCache/
+DawnWebGPUCache/
+Dictionaries/
+DIPS
+DIPS-wal
+GPUCache/
+Local Storage/
+Network Persistent State
+Preferences
+Service Worker/
+Session Storage/
+Shared Dictionary/
+SharedStorage
+SharedStorage-wal
+TransportSecurity
+Trust Tokens
+Trust Tokens-journal
+WebStorage/
+languagepacks.json
+logs/
+machineid
+
+# User data directories that are typically local
+User/globalStorage/
+User/workspaceStorage/
+User/History/
+User/sync/
+
+# MCP config (may contain sensitive data)
+User/mcp.json
